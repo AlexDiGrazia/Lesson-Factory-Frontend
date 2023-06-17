@@ -8,7 +8,7 @@ function App() {
         <div className="video-panel">
           <video 
             className="video" 
-            src="src/assets/Demo.MOV"
+            src="https://d31u5qrj5rhaye.cloudfront.net/Demo.MOV"
             controls
             ></video>
         </div>
