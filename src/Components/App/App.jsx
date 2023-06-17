@@ -8,7 +8,7 @@ function App() {
         <div className="video-panel">
           <video 
             className="video" 
-            src="https://d31u5qrj5rhaye.cloudfront.net/Demo.MOV"
+            src="https://drx4s5overzyz.cloudfront.net/Demo%20(4).mp4"
             controls
             ></video>
         </div>
@@ -18,3 +18,6 @@ function App() {
 }
 
 export default App;
+
+// src="https://d31u5qrj5rhaye.cloudfront.net/Demo.MOV"
+
