@@ -6,7 +6,14 @@ function App() {
       <div className="wrapper">
         <div className="menu"></div>
         <div className="video-panel">
-          <video className="video" playsInline allowFullScreen controls>
+          <video
+            className="video"
+            playsInline
+            allowFullScreen
+            controls
+            poster={/iPhone|iPad|iPod/i.test(navigator.userAgent)
+            && "src/assets/poster.png"}
+          >
             <source
               src="https://drx4s5overzyz.cloudfront.net/Demo%20(4).mp4"
               type="video/mp4"
