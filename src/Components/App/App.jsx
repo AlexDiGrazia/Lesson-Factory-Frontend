@@ -6,7 +6,7 @@ function App() {
       <div className="wrapper">
         <div className="menu"></div>
         <div className="video-panel">
-          <video className="video" controls>
+          <video className="video" playsInline allowFullScreen controls>
             <source
               src="https://drx4s5overzyz.cloudfront.net/Demo%20(4).mp4"
               type="video/mp4"
