@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import "./App.css";
 
 function App() {
@@ -11,8 +12,8 @@ function App() {
             playsInline
             allowFullScreen
             controls
-            poster={/iPhone|iPad|iPod/i.test(navigator.userAgent)
-            && "src/assets/poster.png"}
+            // poster={/iPhone|iPad|iPod/i.test(navigator.userAgent)
+            // && "src/assets/poster.png"}
           >
             <source
               src="https://drx4s5overzyz.cloudfront.net/Demo%20(4).mp4"
