@@ -33,8 +33,10 @@ export const VideoProvider = ({ children }: { children: ReactNode }) => {
   const [currentVideoId, setCurrentVideoId] = useState<number>(9);
 
   useEffect(() => {
-    const lastVideoWatched_id = Number(
-      localStorage.getItem("lastVideoDisplayed-id")
+    const lastVideoWatched_id: number = Number(
+      localStorage.getItem(
+        "lastVideoDisplayed-id"
+      ) /* TO-DO change localStorage name to lastVideoWatched_id */
     );
     if (lastVideoWatched_id) {
       Requests.getVideoById(lastVideoWatched_id).then((res) => {
@@ -42,6 +44,7 @@ export const VideoProvider = ({ children }: { children: ReactNode }) => {
       });
     } else {
       Requests.getFirstVideo().then((res) => {
+        /* TO-DO find better name for getFirstVideo, possible getAnyVideo */
         localStorage.setItem("lastVideoDisplayed-id", res[0].id);
         setCurrentVideoFile(res[0]);
       });
