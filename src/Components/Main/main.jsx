@@ -17,7 +17,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/app",
-        element: <App />,
+        element: <App /> /* TO-DO delete route, not in use */,
       },
       {
         path: "/app/:videoId",
