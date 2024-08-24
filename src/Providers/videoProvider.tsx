@@ -14,7 +14,6 @@ type TVideoContext = {
   setAllVideos: Dispatch<SetStateAction<TVideo[]>>;
   currentVideoFile: TVideo;
   setCurrentVideoFile: Dispatch<SetStateAction<TVideo>>;
-  currentVideoId: number;
   setCurrentVideoId: Dispatch<SetStateAction<number>>;
 };
 export type TVideo = {
@@ -27,29 +26,39 @@ const VideoContext = createContext<TVideoContext>({} as TVideoContext);
 
 export const VideoProvider = ({ children }: { children: ReactNode }) => {
   const [allVideos, setAllVideos] = useState<TVideo[]>([]);
+  const [currentVideoId, setCurrentVideoId] = useState<number>(
+    undefined as unknown as number
+  );
   const [currentVideoFile, setCurrentVideoFile] = useState<TVideo>(
     {} as TVideo
   );
-  const [currentVideoId, setCurrentVideoId] = useState<number>(9);
 
-  useEffect(() => {
-    const lastVideoWatched_id: number = Number(
-      localStorage.getItem(
-        "lastVideoDisplayed-id"
-      ) /* TO-DO change localStorage name to lastVideoWatched_id */
-    );
-    if (lastVideoWatched_id) {
-      Requests.getVideoById(lastVideoWatched_id).then((res) => {
+  const videoId_inLocalStorage: number = Number(
+    localStorage.getItem("videoLastWatched_id")
+  );
+
+  const setInitialVideoFile_andId = () => {
+    if (videoId_inLocalStorage) {
+      Requests.getVideoById(videoId_inLocalStorage).then((res) => {
         setCurrentVideoFile(res);
+        setCurrentVideoId(res.id);
       });
     } else {
-      Requests.getFirstVideo().then((res) => {
-        /* TO-DO find better name for getFirstVideo, possible getAnyVideo */
-        localStorage.setItem("lastVideoDisplayed-id", res[0].id);
-        setCurrentVideoFile(res[0]);
+      Requests.getFirstVideoInTable().then((res) => {
+        localStorage.setItem("videoLastWatched_id", res[0].id);
+        setCurrentVideoFile(res);
+        setCurrentVideoId(res[0].id);
       });
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    if (currentVideoId === undefined) {
+      setInitialVideoFile_andId();
+    } else {
+      Requests.getVideoById(currentVideoId).then(setCurrentVideoFile);
+    }
+  }, [currentVideoId]);
 
   return (
     <VideoContext.Provider
@@ -58,7 +67,6 @@ export const VideoProvider = ({ children }: { children: ReactNode }) => {
         setAllVideos,
         currentVideoFile,
         setCurrentVideoFile,
-        currentVideoId,
         setCurrentVideoId,
       }}
     >
