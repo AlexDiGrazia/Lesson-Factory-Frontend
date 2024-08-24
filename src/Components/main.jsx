@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "../App/App";
-import { VideoProvider } from "../../Providers/videoProvider";
+import "../CSS/index.css";
+import App from "./App";
+import { VideoProvider } from "../Providers/videoProvider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ErrorPage } from "../ErrorPage";
-import { Root } from "../../Routes/Root";
+import { ErrorPage } from "./ErrorPage";
+import { Root } from "../Routes/Root";
 
 const router = createBrowserRouter([
   {

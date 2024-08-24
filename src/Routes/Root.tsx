@@ -4,13 +4,13 @@ import { useVideoContext } from "../Providers/videoProvider";
 export const Root = () => {
   const navigate = useNavigate();
 
-  const { currentVideoFile } = useVideoContext();
+  const { currentVideo } = useVideoContext();
 
   return (
     <>
       <button
         style={{ backgroundColor: "grey", fontSize: "20px" }}
-        onClick={() => navigate(`app/${currentVideoFile.id}`)}
+        onClick={() => navigate(`app/${currentVideo.id}`)}
       >
         Enter Site
       </button>

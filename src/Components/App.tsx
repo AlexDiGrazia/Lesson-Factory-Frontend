@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
 import { useEffect } from "react";
-import { Requests } from "../../API/Requests";
-import { useVideoContext } from "../../Providers/videoProvider";
-import Video from "../Video/Video";
-import VideoTitle from "../VideoTitle/VideoTitle";
-import "./App.css";
-import { NewPost } from "../NewPost";
+import { Requests } from "../API/Requests";
+import { useVideoContext } from "../Providers/videoProvider";
+import Video from "./Video";
+import VideoTitle from "./VideoTitle";
+import "../CSS/App.css";
+import { NewPost } from "./NewPost";
 
 const App = () => {
   const { allVideos, setAllVideos } = useVideoContext();
@@ -22,6 +22,7 @@ const App = () => {
             <VideoTitle
               key={`video_key_${obj.id}`}
               title={obj.title}
+              filename={obj.filename}
               id={obj.id}
             />
           ))}

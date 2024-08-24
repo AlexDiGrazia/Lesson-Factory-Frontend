@@ -8,69 +8,44 @@ import {
   useState,
 } from "react";
 import { Requests } from "../API/Requests";
+import { TVideo } from "../types";
 
 type TVideoContext = {
   allVideos: TVideo[];
   setAllVideos: Dispatch<SetStateAction<TVideo[]>>;
-  currentVideoFile: TVideo;
-  setCurrentVideoFile: Dispatch<SetStateAction<TVideo>>;
-  setCurrentVideoId: Dispatch<SetStateAction<number>>;
-};
-export type TVideo = {
-  id: number;
-  filename: string;
-  title: string;
+  currentVideo: TVideo;
+  setCurrentVideo: Dispatch<SetStateAction<TVideo>>;
 };
 
 const VideoContext = createContext<TVideoContext>({} as TVideoContext);
 
 export const VideoProvider = ({ children }: { children: ReactNode }) => {
   const [allVideos, setAllVideos] = useState<TVideo[]>([]);
-  const [currentVideoId, setCurrentVideoId] = useState<number>(
-    undefined as unknown as number
-  );
-  const [currentVideoFile, setCurrentVideoFile] = useState<TVideo>(
-    {} as TVideo
-  );
+  const [currentVideo, setCurrentVideo] = useState<TVideo>({} as TVideo);
 
-  const videoId_inLocalStorage: number = Number(
-    localStorage.getItem("videoLastWatched_id")
-  );
-
-  const setInitialVideoFile_andId = () => {
-    if (videoId_inLocalStorage) {
-      Requests.getVideoById(videoId_inLocalStorage).then((res) => {
-        setCurrentVideoFile(res);
-        setCurrentVideoId(res.id);
-      });
-    } else {
-      Requests.getFirstVideoInTable().then((res) => {
-        localStorage.setItem("videoLastWatched_id", res[0].id);
-        setCurrentVideoFile(res);
-        setCurrentVideoId(res[0].id);
-      });
-    }
-  };
+  const video_inLocalStorage = localStorage.getItem("videoLastWatched");
 
   useEffect(() => {
-    if (currentVideoId === undefined) {
-      setInitialVideoFile_andId();
+    if (video_inLocalStorage) {
+      setCurrentVideo(JSON.parse(video_inLocalStorage));
     } else {
-      Requests.getVideoById(currentVideoId).then(setCurrentVideoFile);
+      Requests.getFirstVideoInTable().then((res) => {
+        localStorage.setItem("videoLastWatched", JSON.stringify(res[0]));
+        setCurrentVideo(res[0]);
+      });
     }
-  }, [currentVideoId]);
+  }, []);
 
   return (
     <VideoContext.Provider
       value={{
         allVideos,
         setAllVideos,
-        currentVideoFile,
-        setCurrentVideoFile,
-        setCurrentVideoId,
+        currentVideo,
+        setCurrentVideo,
       }}
     >
-      {currentVideoFile && children}
+      {currentVideo && children}
     </VideoContext.Provider>
   );
 };
