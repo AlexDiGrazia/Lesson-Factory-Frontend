@@ -22,7 +22,6 @@ const App = () => {
             <VideoTitle
               key={`video_key_${obj.id}`}
               title={obj.title}
-              filename={obj.filename}
               id={obj.id}
             />
           ))}
