@@ -8,6 +8,7 @@
   height: 100%;
   width: 26%;
   background: #403f3f;
+  overflow-y: scroll;
 }
 
 .video-title {
