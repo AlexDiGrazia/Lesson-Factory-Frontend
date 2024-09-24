@@ -8,19 +8,23 @@ type TVideoTitleProps = {
 };
 
 const VideoTitle = ({ title, filename, id }: TVideoTitleProps) => {
-  const { setCurrentVideo } = useVideoContext();
+  const { setCurrentVideo, sign } = useVideoContext();
   const navigate = useNavigate();
+
   return (
     <>
       <div
         className="video-title"
-        onClick={() => {
-          localStorage.setItem(
-            "videoLastWatched",
-            JSON.stringify({ title, filename, id })
-          );
-          setCurrentVideo({ title, filename, id });
-          navigate(`/app/${id}`);
+        onClick={async () => {
+          sign(filename).then(() => {
+            localStorage.setItem(
+              "videoLastWatched",
+              JSON.stringify({ title, filename, id })
+            );
+            console.log("ok cool");
+            setCurrentVideo({ title, filename, id });
+            navigate(`/app/${id}`);
+          });
         }}
       >
         {title}
