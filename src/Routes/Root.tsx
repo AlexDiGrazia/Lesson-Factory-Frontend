@@ -18,13 +18,17 @@ export const Root = () => {
         <div className="radial-gradient two radial-gradient-dimension"></div>
         <div className="radial-gradient three radial-gradient-dimension"></div>
         <div className="radial-gradient four radial-gradient-dimension"></div>
+        <div className="radial-gradient five radial-gradient-dimension"></div>
+        <button
+          className="enter-site-btn"
+          onClick={() => {
+            console.log("click");
+            navigate(`app/${currentVideo.id}`);
+          }}
+        >
+          Enter Site
+        </button>
       </div>
-      <button
-        style={{ backgroundColor: "grey", fontSize: "20px" }}
-        onClick={() => navigate(`app/${currentVideo.id}`)}
-      >
-        Enter Site
-      </button>
     </>
   );
 };
