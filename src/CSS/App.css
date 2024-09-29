@@ -1,6 +1,11 @@
 body {
   background: rgb(5 5 19);
   position: relative;
+  background-image: radial-gradient(
+    50% 50% at 50% 50%,
+    #52247569 1%,
+    rgb(79 17 17 / 24%) 100%
+  );
 }
 
 .wrapper {
@@ -22,14 +27,14 @@ body {
 }
 
 .radial-gradient-dimension {
-  width: 900px;
-  height: 900px;
+  width: 47%;
+  height: 91%;
 }
 
 .radial-gradient.one {
   background-image: radial-gradient(
     50% 50% at 50% 50%,
-    #373d6d24 1%,
+    #0419c024 1%,
     rgb(2 2 15 / 0%) 100%
   );
   position: absolute;
@@ -66,16 +71,16 @@ body {
   position: absolute;
   top: 46%;
   right: -12%;
-  width: 1200px;
-  height: 1200px;
+  width: 63%;
+  height: 121%;
   opacity: 0.5;
 }
 
 nav {
-  background: red;
   margin: 0;
   display: flex;
   justify-content: end;
+  padding: 14px 0 5px 0;
 }
 
 nav ul {
