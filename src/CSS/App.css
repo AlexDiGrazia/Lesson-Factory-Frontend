@@ -1,5 +1,5 @@
 body {
-  background: rgb(56, 56, 112);
+  background: rgb(5 5 19);
   position: relative;
 }
 
@@ -9,14 +9,66 @@ body {
   display: flex;
 }
 
-.radial-gradient {
-  width: 50px;
-  height: 50px;
-  background-image: radial-gradient(blue 0%, red 100%);
+.radial-gradient-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.radial-gradient-dimension {
+  width: 900px;
+  height: 900px;
+}
+
+.radial-gradient.one {
+  background-image: radial-gradient(
+    50% 50% at 50% 50%,
+    #373d6d24 1%,
+    rgb(2 2 15 / 0%) 100%
+  );
   position: absolute;
   top: 50%;
-  right: 50%;
-  border-radius: 50%;
+  right: 37%;
+}
+.radial-gradient.two {
+  background-image: radial-gradient(
+    50% 50% at 50% 50%,
+    #4c482d3b 1%,
+    rgb(2 2 15 / 0%) 100%
+  );
+
+  position: absolute;
+  top: -10%;
+  left: 0%;
+}
+.radial-gradient.three {
+  background-image: radial-gradient(
+    50% 50% at 50% 50%,
+    #4c2d433b 1%,
+    rgb(2 2 15 / 0%) 100%
+  );
+  position: absolute;
+  top: 10%;
+  right: 10%;
+}
+.radial-gradient.four {
+  background-image: radial-gradient(
+    50% 50% at 50% 50%,
+    #c6590a69 1%,
+    rgb(2 2 15 / 0%) 100%
+  );
+  position: absolute;
+  top: 46%;
+  right: -12%;
+  width: 1200px;
+  height: 1200px;
+  opacity: 0.5;
 }
 
 nav {

@@ -13,7 +13,12 @@ export const Root = () => {
           <li>Login</li>
         </ul>
       </nav>
-      <div className="radial-gradient"></div>
+      <div className="radial-gradient-container">
+        <div className="radial-gradient one radial-gradient-dimension"></div>
+        <div className="radial-gradient two radial-gradient-dimension"></div>
+        <div className="radial-gradient three radial-gradient-dimension"></div>
+        <div className="radial-gradient four radial-gradient-dimension"></div>
+      </div>
       <button
         style={{ backgroundColor: "grey", fontSize: "20px" }}
         onClick={() => navigate(`app/${currentVideo.id}`)}
