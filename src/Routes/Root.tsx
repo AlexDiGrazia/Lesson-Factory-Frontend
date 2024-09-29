@@ -8,6 +8,12 @@ export const Root = () => {
 
   return (
     <>
+      <nav>
+        <ul>
+          <li>Login</li>
+        </ul>
+      </nav>
+      <div className="radial-gradient"></div>
       <button
         style={{ backgroundColor: "grey", fontSize: "20px" }}
         onClick={() => navigate(`app/${currentVideo.id}`)}
