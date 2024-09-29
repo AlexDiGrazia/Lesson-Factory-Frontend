@@ -4,7 +4,7 @@ export const Requests = {
   getAllVideos: () => fetch(`${BASE_URL}/videos`).then((res) => res.json()),
 
   getFirstVideoInTable: () =>
-    fetch(`${BASE_URL}/firstVideo`).then((res) => res.json()),
+    fetch(`${BASE_URL}/videos/firstVideo`).then((res) => res.json()),
 
   getSignedUrl: (url: string) =>
     fetch(`${BASE_URL}/presigned-url`, {
