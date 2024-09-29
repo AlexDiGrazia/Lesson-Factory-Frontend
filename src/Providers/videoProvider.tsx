@@ -25,7 +25,6 @@ type TVideoContext = {
 const VideoContext = createContext<TVideoContext>({} as TVideoContext);
 
 export const VideoProvider = ({ children }: { children: ReactNode }) => {
-  console.log("video provider ran");
   const [allVideos, setAllVideos] = useState<TVideo[]>([]);
   const [currentVideo, setCurrentVideo] = useState<TVideo>({} as TVideo);
   const [signedMp4Url, setSignedMp4Url] = useState<string>("");
