@@ -137,10 +137,15 @@ nav ul li {
 }
 
 .login-form {
-  background: blue;
   display: flex;
   flex-direction: column;
   max-width: 300px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.login-form input {
+  margin-bottom: 10px;
 }
 
 .text-container {
