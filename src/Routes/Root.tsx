@@ -24,7 +24,8 @@ export const Root = () => {
                 // navigate(`app/${currentVideo.id}`);
               }}
             >
-              Login
+              <span className="link-spacing">Login</span> |{" "}
+              <span className="link-spacing">Sign Up</span>
             </li>
           </ul>
         </nav>
