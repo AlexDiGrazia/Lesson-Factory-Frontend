@@ -8,6 +8,18 @@ body {
   );
 }
 
+button {
+  font-size: 16px;
+}
+
+button.submit {
+  max-width: 39%;
+}
+
+.link-spacing {
+  margin: 0 9px;
+}
+
 button.enter-site-btn {
   background: grey;
   font-size: 20px;
@@ -129,6 +141,11 @@ nav ul li {
   list-style-type: none;
 }
 
+nav ul li span:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .menu {
   height: 100%;
   width: 26%;
@@ -150,13 +167,35 @@ nav ul li {
 .login-form {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  /* max-width: 300px; */
   margin-right: auto;
   margin-left: auto;
+  /* width: 500px; */
+  background: #28282d75;
+  padding: 50px 100px;
+  box-shadow: 0px 8px 14px -13px #4e319d;
+}
+
+.login-form p {
+  margin: 0 0 9px 0;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.login-form p span {
+  font-size: 14px;
+}
+
+.login-form p span:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .login-form input {
   margin-bottom: 10px;
+  width: 200px;
+  padding: 5px;
+  font-size: 16px;
 }
 
 .text-container {
