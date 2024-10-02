@@ -1,3 +1,5 @@
+import { PasswordInput } from "./PasswordInput";
+
 export const Login = () => {
   const handleSubmit = () => {};
 
@@ -11,9 +13,20 @@ export const Login = () => {
           </span>
         </p>
         <label htmlFor="username"></label>
-        <input type="text" name="username" placeholder="Username" />
-        <label htmlFor="password"></label>
-        <input type="text" name="password" placeholder="Password" />
+        <input
+          type="text"
+          name="username"
+          className="input-default"
+          placeholder="Username"
+        />
+        <PasswordInput placeholder="Password" />
+        {/* <label htmlFor="password"></label>
+        <input
+          type="text"
+          name="password"
+          className="input-default"
+          placeholder="Password"
+        /> */}
         <button type="submit" className="submit" onSubmit={handleSubmit}>
           Submit
         </button>
