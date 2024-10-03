@@ -12,7 +12,7 @@ button {
   font-size: 16px;
 }
 
-button.submit {
+input.submit {
   max-width: 39%;
 }
 
