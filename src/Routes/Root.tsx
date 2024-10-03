@@ -7,9 +7,6 @@ import { RadialGradient } from "../Components/RadialGradient";
 
 export const Root = () => {
   const [login, setLogin] = useState<boolean>(false);
-  const navigate = useNavigate();
-
-  const { currentVideo } = useVideoContext();
 
   return (
     <>
@@ -21,7 +18,6 @@ export const Root = () => {
               onClick={() => {
                 console.log("click");
                 setLogin(login === true ? false : true);
-                // navigate(`app/${currentVideo.id}`);
               }}
             >
               <span className="link-spacing">Login</span> |{" "}
