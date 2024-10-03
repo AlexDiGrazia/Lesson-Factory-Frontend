@@ -1,19 +1,28 @@
 import { useState } from "react";
 import { PasswordInput } from "./PasswordInput";
+import { useNavigate } from "react-router-dom";
+import { useVideoContext } from "../Providers/videoProvider";
 
 export const Login = () => {
   const [signup, setSignup] = useState<boolean>(false);
 
-  const handleSubmit = () => {};
+  const navigate = useNavigate();
+  const { currentVideo } = useVideoContext();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("submission");
+    navigate(`app/${currentVideo.id}`);
+  };
 
   return (
     <>
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleSubmit}>
         {signup === false && (
           <>
             <p>
               Don't have an account?{" "}
-              <span onClick={() => setSignup(signup === false ? true : false)}>
+              <span onClick={() => setSignup(!signup)}>
                 <strong>Sign up</strong>
               </span>
             </p>
@@ -31,7 +40,7 @@ export const Login = () => {
           <>
             <p>
               Back to{" "}
-              <span onClick={() => setSignup(signup === false ? true : false)}>
+              <span onClick={() => setSignup(!signup)}>
                 <strong>login</strong>
               </span>
             </p>
@@ -47,9 +56,7 @@ export const Login = () => {
           </>
         )}
 
-        <button type="submit" className="submit" onSubmit={handleSubmit}>
-          Submit
-        </button>
+        <input type="submit" value="Submit" className="submit" />
       </form>
     </>
   );
