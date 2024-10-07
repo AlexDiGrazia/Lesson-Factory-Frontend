@@ -1,7 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { useVideoContext } from "../Providers/videoProvider";
 import { useState } from "react";
-import { Login } from "../Components/Login";
+import { LoginForm } from "../Components/LoginForm";
 import { FlexboxCenter } from "../Components/FlexboxCenter";
 import { RadialGradient } from "../Components/RadialGradient";
 
@@ -37,7 +35,7 @@ export const Root = () => {
         )}
         {login === true && (
           <FlexboxCenter>
-            <Login />
+            <LoginForm />
           </FlexboxCenter>
         )}
       </RadialGradient>
