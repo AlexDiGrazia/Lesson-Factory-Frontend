@@ -6,7 +6,9 @@ export type TVideo = {
   title: string;
 };
 
-export type TypeExistingUserLogin = {
+export type Type_ExistingUserLogin_and_NewUserSignup = {
   signup: boolean;
   setSignup: Dispatch<SetStateAction<boolean>>;
+  login: boolean;
+  setLogin: Dispatch<SetStateAction<boolean>>;
 };
