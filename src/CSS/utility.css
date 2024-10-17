@@ -1,0 +1,4 @@
+.link_hover:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
