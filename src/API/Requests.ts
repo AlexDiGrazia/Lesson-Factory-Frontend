@@ -14,4 +14,22 @@ export const Requests = {
       },
       body: JSON.stringify({ url }),
     }).then((res) => res.json()),
+
+  signup: (email: string, password: string, role: string) =>
+    fetch(`${BASE_URL}/auth/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password, role }),
+    }).then((res) => res.json()),
+
+  login: (email: string, password: string) =>
+    fetch(`${BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    }).then((res) => res.json()),
 };
