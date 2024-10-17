@@ -134,11 +134,17 @@ nav {
 nav ul {
   margin: 0;
   padding-right: 60px;
+  font-size: 18px;
   z-index: 2;
 }
 
 nav ul li {
   list-style-type: none;
+}
+
+nav ul li svg {
+  margin-right: 13px;
+  margin-top: 2px;
 }
 
 .menu {
