@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "../CSS/index.css";
 import App from "./App";
 import { VideoProvider } from "../Providers/videoProvider";
+import { UserProvider } from "../Providers/UserProvider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./ErrorPage";
 import { Root } from "../Routes/Root";
@@ -29,8 +30,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <VideoProvider>
-      <RouterProvider router={router} />
-    </VideoProvider>
+    <UserProvider>
+      <VideoProvider>
+        <RouterProvider router={router} />
+      </VideoProvider>
+    </UserProvider>
   </React.StrictMode>
 );
