@@ -4,6 +4,8 @@ import { RadialGradient } from "../Components/RadialGradient";
 import { ExistingUserLogin } from "../Components/ExistingUserLogin";
 import { NewUserSignup } from "../Components/NewUserSignup";
 import "../CSS/utility.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export const Root = () => {
   const [login, setLogin] = useState<boolean>(false);
@@ -39,6 +41,7 @@ export const Root = () => {
                   if (signup === true) setSignup(false);
                 }}
               >
+                <FontAwesomeIcon icon={faArrowLeft} />
                 Back
               </li>
             )}
