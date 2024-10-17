@@ -141,11 +141,6 @@ nav ul li {
   list-style-type: none;
 }
 
-nav ul li span:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
 .menu {
   height: 100%;
   width: 26%;
@@ -243,4 +238,8 @@ nav ul li span:hover {
 
 .password-input-container {
   position: relative;
+}
+
+input.submit {
+  margin-top: 4px;
 }
