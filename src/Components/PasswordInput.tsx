@@ -26,6 +26,7 @@ export const PasswordInput = ({
 
   return (
     <>
+      {/* TO DO: fix key component */}
       <div key={key} className="input-default password-input-container">
         <FontAwesomeIcon
           icon={icon}
