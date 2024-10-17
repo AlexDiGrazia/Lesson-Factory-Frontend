@@ -1,29 +1,50 @@
 import { useState } from "react";
-import { LoginForm } from "../Components/LoginForm";
 import { FlexboxCenter } from "../Components/FlexboxCenter";
 import { RadialGradient } from "../Components/RadialGradient";
+import { ExistingUserLogin } from "../Components/ExistingUserLogin";
+import { NewUserSignup } from "../Components/NewUserSignup";
+import "../CSS/utility.css";
 
 export const Root = () => {
   const [login, setLogin] = useState<boolean>(false);
+  const [signup, setSignup] = useState<boolean>(false);
 
   return (
     <>
       <RadialGradient>
         <nav>
           <ul>
-            <li
-              className="login-btn"
-              onClick={() => {
-                console.log("click");
-                setLogin(login === true ? false : true);
-              }}
-            >
-              <span className="link-spacing">Login</span> |{" "}
-              <span className="link-spacing">Sign Up</span>
-            </li>
+            {signup === false && login === false && (
+              <li className="login-btn">
+                <span
+                  className="link-spacing link_hover"
+                  onClick={() => setLogin(true)}
+                >
+                  Login
+                </span>{" "}
+                |{" "}
+                <span
+                  className="link-spacing link_hover"
+                  onClick={() => setSignup(true)}
+                >
+                  Sign Up
+                </span>
+              </li>
+            )}
+            {(login === true || signup === true) && (
+              <li
+                className="link_hover"
+                onClick={() => {
+                  if (login === true) setLogin(false);
+                  if (signup === true) setSignup(false);
+                }}
+              >
+                Back
+              </li>
+            )}
           </ul>
         </nav>
-        {login === false && (
+        {login === false && signup === false && (
           <div className="text-container">
             <h2>Welcome to the Lesson Factory!</h2>
             <p>
@@ -35,7 +56,22 @@ export const Root = () => {
         )}
         {login === true && (
           <FlexboxCenter>
-            <LoginForm />
+            <ExistingUserLogin
+              login={login}
+              setLogin={setLogin}
+              signup={signup}
+              setSignup={setSignup}
+            />
+          </FlexboxCenter>
+        )}
+        {signup === true && (
+          <FlexboxCenter>
+            <NewUserSignup
+              login={login}
+              setLogin={setLogin}
+              signup={signup}
+              setSignup={setSignup}
+            />
           </FlexboxCenter>
         )}
       </RadialGradient>

@@ -1,5 +1,5 @@
 import { PasswordInput } from "./PasswordInput";
-import { TypeExistingUserLogin } from "../types";
+import { Type_ExistingUserLogin_and_NewUserSignup } from "../types";
 import { useVideoContext } from "../Providers/videoProvider";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -8,9 +8,11 @@ import toast from "react-hot-toast";
 import { useUserContext } from "../Providers/UserProvider";
 
 export const ExistingUserLogin = ({
+  login,
+  setLogin,
   signup,
   setSignup,
-}: TypeExistingUserLogin) => {
+}: Type_ExistingUserLogin_and_NewUserSignup) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -41,7 +43,12 @@ export const ExistingUserLogin = ({
       <form className="login-form" onSubmit={handleSubmit}>
         <p>
           Don't have an account?{" "}
-          <span onClick={() => setSignup(!signup)}>
+          <span
+            onClick={() => {
+              setLogin(!login);
+              setSignup(!signup);
+            }}
+          >
             <strong>Sign up</strong>
           </span>
         </p>

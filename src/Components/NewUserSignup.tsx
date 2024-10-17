@@ -1,11 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { TypeExistingUserLogin } from "../types";
+import { Type_ExistingUserLogin_and_NewUserSignup } from "../types";
 import { PasswordInput } from "./PasswordInput";
 import { useVideoContext } from "../Providers/videoProvider";
 import { useState } from "react";
 import { Requests } from "../API/Requests";
 
-export const NewUserSignup = ({ signup, setSignup }: TypeExistingUserLogin) => {
+export const NewUserSignup = ({
+  login,
+  setLogin,
+  signup,
+  setSignup,
+}: Type_ExistingUserLogin_and_NewUserSignup) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
@@ -33,7 +38,12 @@ export const NewUserSignup = ({ signup, setSignup }: TypeExistingUserLogin) => {
       <form className="login-form" onSubmit={handleSubmit}>
         <p>
           Back to{" "}
-          <span onClick={() => setSignup(!signup)}>
+          <span
+            onClick={() => {
+              setLogin(!login);
+              setSignup(!signup);
+            }}
+          >
             <strong>login</strong>
           </span>
         </p>
