@@ -14,7 +14,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Root />,
+        element: <Root queryParam="landing_page" />,
+      },
+      {
+        path: "/login",
+        element: <Root queryParam="landing_page" />,
+      },
+      {
+        path: "/signup",
+        element: <Root queryParam="landing_page" />,
+      },
+      {
+        path: "/signup/verify_email",
+        element: <Root queryParam="email_verification" />,
       },
       {
         path: "/app",
