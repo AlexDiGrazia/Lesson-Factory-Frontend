@@ -40,13 +40,14 @@ export const ExistingUserLogin = ({
   };
   return (
     <>
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form className="login-form popup_box_default" onSubmit={handleSubmit}>
         <p>
           Don't have an account?{" "}
           <span
             onClick={() => {
               setLogin(!login);
               setSignup(!signup);
+              navigate("/signup");
             }}
           >
             <strong>Sign up</strong>
