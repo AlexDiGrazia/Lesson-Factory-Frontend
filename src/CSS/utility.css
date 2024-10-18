@@ -3,6 +3,10 @@
   text-decoration: underline;
 }
 
+.cursor_pointer {
+  cursor: pointer;
+}
+
 .flex {
   display: flex;
 }
