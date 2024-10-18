@@ -7,6 +7,12 @@ import { UserProvider } from "../Providers/UserProvider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./ErrorPage";
 import { Root } from "../Routes/Root";
+import { LandingPageHero } from "./LandingPageHero";
+import { FlexboxCenter } from "./FlexboxCenter";
+import { ExistingUserLogin } from "./ExistingUserLogin";
+import { NewUserSignup } from "./NewUserSignup";
+import { LandingPage } from "./LandingPage";
+import { EmailVerificationSplash } from "./emailVerificationSplash";
 
 const router = createBrowserRouter([
   {
@@ -14,19 +20,47 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Root queryParam="landing_page" />,
+        element: (
+          <Root>
+            <LandingPage>
+              <LandingPageHero />
+            </LandingPage>
+          </Root>
+        ),
       },
       {
         path: "/login",
-        element: <Root queryParam="landing_page" />,
+        element: (
+          <Root>
+            <LandingPage>
+              <FlexboxCenter>
+                <ExistingUserLogin />
+              </FlexboxCenter>
+            </LandingPage>
+          </Root>
+        ),
       },
       {
         path: "/signup",
-        element: <Root queryParam="landing_page" />,
+        element: (
+          <Root>
+            <LandingPage>
+              <FlexboxCenter>
+                <NewUserSignup />
+              </FlexboxCenter>
+            </LandingPage>
+          </Root>
+        ),
       },
       {
         path: "/signup/verify_email",
-        element: <Root queryParam="email_verification" />,
+        element: (
+          <Root>
+            <FlexboxCenter>
+              <EmailVerificationSplash />
+            </FlexboxCenter>
+          </Root>
+        ),
       },
       {
         path: "/app",

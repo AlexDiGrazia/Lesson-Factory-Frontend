@@ -1,22 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { Type_ExistingUserLogin_and_NewUserSignup } from "../types";
 import { PasswordInput } from "./PasswordInput";
-import { useVideoContext } from "../Providers/videoProvider";
 import { useState } from "react";
 import { Requests } from "../API/Requests";
 
-export const NewUserSignup = ({
-  login,
-  setLogin,
-  signup,
-  setSignup,
-}: Type_ExistingUserLogin_and_NewUserSignup) => {
+export const NewUserSignup = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
 
   const navigate = useNavigate();
-  const { currentVideo } = useVideoContext();
 
   const clearSignupForm = () => {
     setEmail("");
@@ -40,8 +32,6 @@ export const NewUserSignup = ({
           Back to{" "}
           <span
             onClick={() => {
-              setLogin(!login);
-              setSignup(!signup);
               navigate("/login");
             }}
           >
