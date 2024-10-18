@@ -172,7 +172,10 @@ nav ul li svg {
   margin-right: auto;
   margin-left: auto;
   /* width: 500px; */
-  background: #28282d75;
+}
+
+.popup_box_default {
+  background: #25242470;
   padding: 50px 100px;
   box-shadow: 0px 8px 14px -13px #4e319d;
 }
@@ -248,4 +251,54 @@ nav ul li svg {
 
 input.submit {
   margin-top: 4px;
+}
+
+.back_button:hover {
+  border-bottom: 1px solid white;
+  cursor: pointer;
+}
+
+div.emailVerificationSplash {
+  /* padding: 50px 0px 50px 80px; */
+  padding: 50px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 480px;
+}
+
+.emailVerificationSplash h2 {
+  margin-bottom: 0px;
+  font-size: 32px;
+  margin-top: 0;
+  width: fit-content;
+  padding: 0;
+}
+.emailVerificationSplash p {
+  margin-bottom: 26px;
+  margin-top: 12px;
+  max-width: 73%;
+  width: fit-content;
+}
+.emailVerificationSplash div span {
+  /* color: #3e3ed8; */
+  /* color: #ff8181; */
+  color: #bebbff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.emailVerificationSplash div {
+  /* align-items: center; */
+  width: 373px;
+  padding: 0;
+}
+
+.emailVerificationSplash div button {
+  margin-left: 50px;
+  cursor: pointer;
+  padding: 5px 5px;
+  border-color: #737391;
+  border-radius: 3px;
+  background: #484854;
 }
