@@ -63,7 +63,7 @@ export const NewUserSignup = () => {
             setPasswordConfirmation(e.target.value)
           }
         />
-        <input type="submit" value="Submit" className="submit" />
+        <input type="submit" value="Submit" className="submit cursor_pointer" />
       </form>
     </>
   );
