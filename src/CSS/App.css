@@ -14,6 +14,19 @@ button {
 
 input.submit {
   max-width: 39%;
+  transition: background 0.2s linear;
+  margin-top: 4px;
+  /* border: 1px solid #858585; */
+  border-radius: 2px;
+  /* background: transparent; */
+  /* background: #31318f; */
+  background: #438fb870;
+  border: 1px solid white;
+}
+
+input.submit:hover {
+  background: #9a7eaa80;
+  background: transparent;
 }
 
 .link-spacing {
@@ -247,10 +260,6 @@ nav ul li svg {
 
 .password-input-container {
   position: relative;
-}
-
-input.submit {
-  margin-top: 4px;
 }
 
 .back_button:hover {
