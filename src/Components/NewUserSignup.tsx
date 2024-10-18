@@ -30,18 +30,19 @@ export const NewUserSignup = ({
     password === passwordConfirmation &&
       Requests.signup(email, password, "USER").then(() => {
         clearSignupForm();
-        navigate(`app/${currentVideo.id}`);
+        navigate(`verify_email`);
       });
   };
   return (
     <>
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form className="login-form popup_box_default" onSubmit={handleSubmit}>
         <p>
           Back to{" "}
           <span
             onClick={() => {
               setLogin(!login);
               setSignup(!signup);
+              navigate("/login");
             }}
           >
             <strong>login</strong>
