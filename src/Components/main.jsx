@@ -12,7 +12,8 @@ import { FlexboxCenter } from "./FlexboxCenter";
 import { ExistingUserLogin } from "./ExistingUserLogin";
 import { NewUserSignup } from "./NewUserSignup";
 import { LandingPage } from "./LandingPage";
-import { EmailVerificationSplash } from "./emailVerificationSplash";
+import { EmailVerificationSplash } from "./EmailVerificationSplash";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <UserProvider>
       <VideoProvider>
+        <Toaster />
         <RouterProvider router={router} />
       </VideoProvider>
     </UserProvider>
