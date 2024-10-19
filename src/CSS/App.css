@@ -298,6 +298,13 @@ div.emailVerificationSplash {
   transition: transform 0.1s linear;
 }
 
+.toast-resend_link-span {
+  color: #5651b4;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: transform 0.1s linear;
+}
+
 .emailVerificationSplash div span:hover {
   transform: scale(1.05);
 }
@@ -314,4 +321,12 @@ div.emailVerificationSplash {
   border-color: #737391;
   border-radius: 3px;
   background: #484854;
+}
+
+.alert_icon {
+  color: #f4b313;
+}
+
+.go2072408551 {
+  max-width: none;
 }
