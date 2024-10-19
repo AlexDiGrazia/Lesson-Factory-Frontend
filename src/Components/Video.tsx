@@ -1,8 +1,5 @@
-// import { useEffect, useState } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useVideoContext } from "../Providers/videoProvider";
-import { Requests } from "../API/Requests";
-// import { Requests } from "../API/Requests";
 
 const Video = () => {
   const { currentVideo, signedMp4Url, signedWebmUrl, sign } = useVideoContext();
