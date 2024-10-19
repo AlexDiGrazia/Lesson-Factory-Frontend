@@ -5,12 +5,12 @@ import { useState } from "react";
 
 export const PasswordInput = ({
   placeholder,
-  key,
+
   value,
   onChange,
 }: {
   placeholder: string;
-  key: string;
+
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
@@ -26,8 +26,7 @@ export const PasswordInput = ({
 
   return (
     <>
-      {/* TO DO: fix key component */}
-      <div key={key} className="input-default password-input-container">
+      <div className="input-default password-input-container">
         <FontAwesomeIcon
           icon={icon}
           className="password-toggle"
