@@ -295,10 +295,14 @@ div.emailVerificationSplash {
   color: #bebbff;
   text-decoration: underline;
   cursor: pointer;
+  transition: transform 0.1s linear;
+}
+
+.emailVerificationSplash div span:hover {
+  transform: scale(1.05);
 }
 
 .emailVerificationSplash div {
-  /* align-items: center; */
   width: 373px;
   padding: 0;
 }
