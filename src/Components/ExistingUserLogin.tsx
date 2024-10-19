@@ -45,6 +45,7 @@ export const ExistingUserLogin = () => {
           clearLoginForm();
           navigate(`/app/${currentVideo.id}`);
         } else {
+          // TO DO make toast its own component
           toast(
             (t) => (
               <div style={{ display: "flex" }}>
