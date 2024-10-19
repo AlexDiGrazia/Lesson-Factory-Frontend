@@ -7,6 +7,14 @@
   cursor: pointer;
 }
 
+.align_items_center {
+  align-items: center;
+}
+
+.justify_content_center {
+  justify-content: center;
+}
+
 .flex {
   display: flex;
 }
