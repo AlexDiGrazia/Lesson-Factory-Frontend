@@ -32,4 +32,13 @@ export const Requests = {
       },
       body: JSON.stringify({ email, password }),
     }).then((res) => res.json()),
+
+  resendVerificationEmail: (email: string, id: number) =>
+    fetch(`${BASE_URL}/confirmation/resend_email`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, id }),
+    }).then((res) => res.json()),
 };
