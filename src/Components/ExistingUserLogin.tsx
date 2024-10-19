@@ -26,7 +26,7 @@ export const ExistingUserLogin = () => {
         localStorage.setItem("JWT", res.JWT);
         setJWT(res.JWT);
         clearLoginForm();
-        navigate(`app/${currentVideo.id}`);
+        navigate(`/app/${currentVideo.id}`);
       } else {
         toast.error("One of your login credentials is incorrect");
       }
