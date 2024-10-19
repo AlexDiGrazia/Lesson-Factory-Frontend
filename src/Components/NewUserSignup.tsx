@@ -20,7 +20,9 @@ export const NewUserSignup = () => {
     e.preventDefault();
     console.log("submission");
     password === passwordConfirmation &&
-      Requests.signup(email, password, "USER").then(() => {
+      Requests.signup(email, password, "USER").then((res) => {
+        localStorage.setItem("email", res.email);
+        localStorage.setItem("userId", res.id);
         clearSignupForm();
         navigate(`verify_email`);
       });
