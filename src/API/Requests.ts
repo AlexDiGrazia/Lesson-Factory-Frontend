@@ -1,7 +1,14 @@
 export const BASE_URL = "http://localhost:3000";
 
 export const Requests = {
-  getAllVideos: () => fetch(`${BASE_URL}/videos`).then((res) => res.json()),
+  getAllVideos: (JWT: string) =>
+    fetch(`${BASE_URL}/videos`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + JWT,
+      },
+    }).then((res) => res.json()),
 
   getFirstVideoInTable: () =>
     fetch(`${BASE_URL}/videos/firstVideo`).then((res) => res.json()),
