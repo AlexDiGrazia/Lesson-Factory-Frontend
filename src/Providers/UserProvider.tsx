@@ -23,7 +23,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       const storedJWT = localStorage.getItem("JWT");
       if (storedJWT) {
         setJWT(storedJWT);
-        console.log("user provider" + storedJWT);
       }
     }
   });
