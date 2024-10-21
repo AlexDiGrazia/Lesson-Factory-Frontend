@@ -13,6 +13,7 @@ const App = () => {
   const { JWT } = useUserContext();
 
   useEffect(() => {
+    console.log("JWT: " + JWT);
     Requests.getAllVideos(JWT).then(setAllVideos);
   }, []);
 
