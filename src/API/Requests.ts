@@ -49,5 +49,3 @@ export const Requests = {
       body: JSON.stringify({ email, id }),
     }).then((res) => res.json()),
 };
-
-// test
