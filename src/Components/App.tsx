@@ -6,12 +6,14 @@ import Video from "./Video";
 import VideoTitle from "./VideoTitle";
 import "../CSS/App.css";
 import { NewPost } from "./NewPost";
+import { useUserContext } from "../Providers/UserProvider";
 
 const App = () => {
   const { allVideos, setAllVideos } = useVideoContext();
+  const { JWT } = useUserContext();
 
   useEffect(() => {
-    Requests.getAllVideos().then(setAllVideos);
+    Requests.getAllVideos(JWT).then(setAllVideos);
   }, []);
 
   return (
