@@ -6,7 +6,7 @@ export const Requests = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer" + JWT,
+        Authorization: "Bearer " + JWT,
       },
     }).then((res) => res.json()),
 
