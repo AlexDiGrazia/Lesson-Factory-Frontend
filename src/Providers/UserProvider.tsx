@@ -19,6 +19,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [JWT, setJWT] = useState<string>("");
 
   useEffect(() => {
+    // consder if (JWT in local storage, setJWET(jwt in local storage)) instead of if (JWT === "")
     if (JWT === "") {
       const storedJWT = localStorage.getItem("JWT");
       if (storedJWT) {
