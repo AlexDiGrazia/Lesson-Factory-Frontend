@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { BASE_URL } from "../API/Requests";
+import { useUserContext } from "../Providers/UserProvider";
 
 export const NewPost = () => {
   const [file, setFile] = useState<File | undefined>();
   const [caption, setCaption] = useState("");
+
+  const { JWT } = useUserContext();
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -19,9 +22,11 @@ export const NewPost = () => {
     await fetch(`${BASE_URL}/upload`, {
       method: "POST",
       // Read on stack overflow that multipart/form-data is inferred with fetch, and that including it explicitly causes problems
-      // headers: {
-      //   "Content-Type": "multipart/form-data",
-      // },
+      headers: {
+        // "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + JWT,
+        x_meta_function: "uploadNewVideo",
+      },
       body: formData,
     }).then(() => {
       setFile(undefined);
