@@ -5,6 +5,7 @@ import Video from "./Video";
 import VideoTitle from "./VideoTitle";
 import "../CSS/App.css";
 import { NewPost } from "./NewPost";
+import { CheckoutForm } from "./CheckoutForm";
 
 const App = () => {
   const { allVideos } = useVideoContext();
@@ -26,6 +27,7 @@ const App = () => {
         <div className="video-panel">
           <Video />
           <NewPost />
+          <CheckoutForm />
         </div>
       </div>
     </>
