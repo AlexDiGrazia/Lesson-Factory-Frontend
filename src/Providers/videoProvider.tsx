@@ -9,6 +9,7 @@ import {
 } from "react";
 import { Requests } from "../API/Requests";
 import { TVideo } from "../types";
+import { useUserContext } from "./UserProvider";
 
 type TVideoContext = {
   allVideos: TVideo[];
@@ -20,6 +21,7 @@ type TVideoContext = {
   setSignedMp4Url: Dispatch<SetStateAction<string>>;
   setSignedWebmUrl: Dispatch<SetStateAction<string>>;
   sign: (filename: string) => Promise<void>;
+  fetchAllVideos: () => void;
 };
 
 const VideoContext = createContext<TVideoContext>({} as TVideoContext);
@@ -29,7 +31,8 @@ export const VideoProvider = ({ children }: { children: ReactNode }) => {
   const [currentVideo, setCurrentVideo] = useState<TVideo>({} as TVideo);
   const [signedMp4Url, setSignedMp4Url] = useState<string>("");
   const [signedWebmUrl, setSignedWebmUrl] = useState<string>("");
-  const video_inLocalStorage = localStorage.getItem("videoLastWatched");
+
+  const { JWT, setJWT } = useUserContext();
 
   const cloudfrontDistribution = import.meta.env.VITE_CLOUDFRONT_DISTRIBUTION;
 
@@ -37,10 +40,12 @@ export const VideoProvider = ({ children }: { children: ReactNode }) => {
     return new Promise<void>(async (resolve, reject) => {
       try {
         await Requests.getSignedUrl(
-          `${cloudfrontDistribution}/${filename}.mp4`
+          `${cloudfrontDistribution}/${filename}.mp4`,
+          JWT
         ).then((res) => setSignedMp4Url(res.signedUrl));
         await Requests.getSignedUrl(
-          `${cloudfrontDistribution}/${filename}.webm`
+          `${cloudfrontDistribution}/${filename}.webm`,
+          JWT
         ).then((res) => setSignedWebmUrl(res.signedUrl));
         resolve();
       } catch (error) {
@@ -50,18 +55,40 @@ export const VideoProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  useEffect(() => {
-    if (video_inLocalStorage) {
-      setCurrentVideo(JSON.parse(video_inLocalStorage));
-      sign(JSON.parse(video_inLocalStorage).filename);
+  const setInitialVideoDisplayed = () => {
+    const video_inLocalStorage = localStorage.getItem("videoLastWatched");
+
+    if (!video_inLocalStorage) {
+      console.error({ error: "No video set in localStorage" });
+      return;
+    }
+
+    setCurrentVideo(JSON.parse(video_inLocalStorage));
+    sign(JSON.parse(video_inLocalStorage).filename);
+  };
+
+  const fetchAllVideos = () => {
+    if (JWT) {
+      Requests.getAllVideos(JWT).then(setAllVideos);
     } else {
-      Requests.getFirstVideoInTable().then((res) => {
-        localStorage.setItem("videoLastWatched", JSON.stringify(res[0]));
-        sign(res[0].filename);
-        setCurrentVideo(res[0]);
+      const jwtFromStorage = localStorage.getItem("JWT");
+      if (!jwtFromStorage) {
+        console.error({ error: "no JWT in local storeage" });
+        return;
+      }
+      Requests.getAllVideos(jwtFromStorage).then((res) => {
+        setAllVideos(res);
+        setJWT(jwtFromStorage);
       });
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    if (JWT) {
+      fetchAllVideos();
+      setInitialVideoDisplayed();
+    }
+  }, [JWT]);
 
   return (
     <VideoContext.Provider
@@ -75,6 +102,7 @@ export const VideoProvider = ({ children }: { children: ReactNode }) => {
         signedWebmUrl,
         setSignedWebmUrl,
         sign,
+        fetchAllVideos,
       }}
     >
       {currentVideo && children}

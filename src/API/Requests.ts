@@ -7,17 +7,27 @@ export const Requests = {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + JWT,
+        x_meta_function: "getAllVideos",
       },
     }).then((res) => res.json()),
 
-  getFirstVideoInTable: () =>
-    fetch(`${BASE_URL}/videos/firstVideo`).then((res) => res.json()),
+  getFirstVideoInTable: (JWT: string) =>
+    fetch(`${BASE_URL}/videos/firstVideo`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + JWT,
+        x_meta_function: "getFirstVideoInTable",
+      },
+    }).then((res) => res.json()),
 
-  getSignedUrl: (url: string) =>
+  getSignedUrl: (url: string, JWT: string) =>
     fetch(`${BASE_URL}/presigned-url`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + JWT,
+        x_meta_function: "getSignedUrl",
       },
       body: JSON.stringify({ url }),
     }).then((res) => res.json()),
@@ -27,6 +37,7 @@ export const Requests = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        x_meta_function: "signup",
       },
       body: JSON.stringify({ email, password, role }),
     }).then((res) => res.json()),
@@ -36,6 +47,7 @@ export const Requests = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        x_meta_function: "login",
       },
       body: JSON.stringify({ email, password }),
     }).then((res) => res.json()),
@@ -45,6 +57,7 @@ export const Requests = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        x_meta_function: "resendVerificationEmail",
       },
       body: JSON.stringify({ email, id }),
     }).then((res) => res.json()),

@@ -69,7 +69,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/app/:videoId",
-        element: <App />,
+
+        element: (
+          <VideoProvider>
+            <App />
+          </VideoProvider>
+        ),
       },
     ],
   },
@@ -78,10 +83,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <UserProvider>
-      <VideoProvider>
-        <Toaster />
-        <RouterProvider router={router} />
-      </VideoProvider>
+      <Toaster />
+      <RouterProvider router={router} />
     </UserProvider>
   </React.StrictMode>
 );
