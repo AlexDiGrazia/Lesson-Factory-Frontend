@@ -18,9 +18,11 @@ const UserContext = createContext<TUserContext>({} as TUserContext);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [JWT, setJWT] = useState<string>("");
 
+  const jwtFromStorage = localStorage.getItem("JWT");
+  const pageWasRefreshed = JWT === "" && jwtFromStorage;
+
   useEffect(() => {
-    const jwtFromStorage = localStorage.getItem("JWT");
-    if (JWT === "" && jwtFromStorage) {
+    if (pageWasRefreshed) {
       setJWT(jwtFromStorage);
     }
   });
