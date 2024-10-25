@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { Requests } from "../API/Requests";
-import toast from "react-hot-toast";
 import { useState } from "react";
 import { ResendEmailSpan } from "./ResendEmailSpan";
 
