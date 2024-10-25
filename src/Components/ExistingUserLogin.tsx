@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useUserContext } from "../Providers/UserProvider";
 import { jwtDecode } from "jwt-decode";
 
-import { sendVerifyEmailToast } from "./verifyEmailToast";
+import { sendVerifyEmailToast } from "./VerifyEmailToast";
 
 type JwtPayload = {
   id: number;
