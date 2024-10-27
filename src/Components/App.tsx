@@ -27,7 +27,7 @@ const App = () => {
         <div className="video-panel">
           <Video />
           <NewPost />
-          <CheckoutForm />
+          {/* <CheckoutForm /> */}
         </div>
       </div>
     </>
