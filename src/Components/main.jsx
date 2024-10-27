@@ -14,6 +14,8 @@ import { NewUserSignup } from "./NewUserSignup";
 import { LandingPage } from "./LandingPage";
 import { EmailVerificationSplash } from "./EmailVerificationSplash";
 import { Toaster } from "react-hot-toast";
+import { CheckoutForm } from "./CheckoutForm";
+import { PaymentConfirmation } from "./PaymentConfirmation";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +52,26 @@ const router = createBrowserRouter([
                 <NewUserSignup />
               </FlexboxCenter>
             </LandingPage>
+          </Root>
+        ),
+      },
+      {
+        path: "/signup/payment",
+        element: (
+          <Root>
+            <FlexboxCenter>
+              <CheckoutForm />
+            </FlexboxCenter>
+          </Root>
+        ),
+      },
+      {
+        path: "/signup/payment/confirmation",
+        element: (
+          <Root>
+            <FlexboxCenter>
+              <PaymentConfirmation />
+            </FlexboxCenter>
           </Root>
         ),
       },
