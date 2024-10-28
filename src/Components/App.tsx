@@ -1,17 +1,15 @@
 /* eslint-disable no-undef */
-import { useEffect } from "react";
 import { useVideoContext } from "../Providers/videoProvider";
 import Video from "./Video";
 import VideoTitle from "./VideoTitle";
 import "../CSS/App.css";
-import { NewPost } from "./NewPost";
-import { CheckoutForm } from "./CheckoutForm";
 
 const App = () => {
   const { allVideos } = useVideoContext();
 
   return (
     <>
+      <nav className="main_app_nav"></nav>
       <div className="wrapper">
         <div className="menu">
           {allVideos.length > 0 &&
@@ -26,8 +24,6 @@ const App = () => {
         </div>
         <div className="video-panel">
           <Video />
-          <NewPost />
-          {/* <CheckoutForm /> */}
         </div>
       </div>
     </>
