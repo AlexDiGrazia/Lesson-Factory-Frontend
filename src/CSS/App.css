@@ -398,6 +398,23 @@ div.emailVerificationSplash {
   transition: transition 0.3s linear;
 }
 
+.user_icon_circle {
+  margin-right: 30px;
+  cursor: pointer;
+  background: #01596b;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.user_icon {
+  color: #f1f1f1;
+  font-size: 24px;
+}
+
 .main_app_nav:hover {
   transition: scale(1.1);
 }
@@ -422,6 +439,44 @@ div.emailVerificationSplash {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.CTA_button_wrapper {
+  position: absolute;
+  bottom: 31%;
+}
+
+.CTA_button_wrapper ul li {
+  list-style: none;
+  width: 200px;
+  cursor: pointer;
+  transition: transform 0.15s linear;
+}
+
+.CTA_button_wrapper ul li a {
+  text-decoration: none;
+  background: #01596b;
+  padding: 5px 22px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #f1f1f1;
+  display: inline-block;
+  transition: transform 0.15s linear;
+}
+
+.CTA_button_wrapper ul li a:hover {
+  transform: scale(1.02);
+}
+
+.CTA_button_wrapper ul {
+  display: flex;
+  width: 450px;
+  justify-content: space-between;
+}
+
+.CTA_button_wrapper ul li:hover {
+  transform: scale(1.02);
 }
 
 .lock_icon {
