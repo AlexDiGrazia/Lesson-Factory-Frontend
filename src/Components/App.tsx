@@ -3,11 +3,13 @@ import { useVideoContext } from "../Providers/videoProvider";
 import Video from "./Video";
 import VideoTitle from "./VideoTitle";
 import "../CSS/App.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../Providers/UserProvider";
 import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from "../types";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 const App = () => {
   const [subscribed, setSubscribed] = useState<boolean>(false);
@@ -50,12 +52,24 @@ const App = () => {
         </div>
         <div className="video-panel">
           <div className="video_modal">
+            {!subscribed && (
+              <div className="CTA_container">
+                <FontAwesomeIcon className="lock_icon" icon={faLock} />
+              </div>
+            )}
             <Video />
             {!subscribed && (
               <div
                 className="video_overlay"
                 style={{ filter: !subscribed ? "blur(2px)" : "none" }}
-              ></div>
+              >
+                <Link className="CTA_buttons" to="">
+                  Subscribe
+                </Link>
+                <Link className="CTA_buttons" to="">
+                  Buy single video
+                </Link>
+              </div>
             )}
           </div>
         </div>

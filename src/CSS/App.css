@@ -406,3 +406,25 @@ div.emailVerificationSplash {
   height: 100vh !important;
   transition: height 0.1s !important;
 }
+
+.CTA_buttons {
+  position: absolute;
+}
+
+.CTA_container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 200;
+  /* border: 3px solid blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lock_icon {
+  font-size: 48px;
+  color: #535669;
+}
