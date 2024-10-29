@@ -3,8 +3,11 @@ import { JwtPayload } from "../types";
 import { useEffect } from "react";
 import { Requests } from "../API/Requests";
 import { Link } from "react-router-dom";
+import { useUserContext } from "../Providers/UserProvider";
 
 export const PaymentConfirmation = () => {
+  const { setJWT } = useUserContext();
+
   const jwtFromStorage = localStorage.getItem("JWT");
   const videoLastWatched = localStorage.getItem("videoLastWatched");
   if (!jwtFromStorage || !videoLastWatched) {
@@ -16,8 +19,10 @@ export const PaymentConfirmation = () => {
   const decodedJWT = jwtDecode<JwtPayload>(jwtFromStorage);
 
   useEffect(() => {
-    Requests.updateSubscriptionStatus(decodedJWT.id);
-    // TODO Refresh new JWT so user returns to dashboard with non-blurry videos
+    Requests.updateSubscriptionStatus(decodedJWT.id).then((res) => {
+      localStorage.setItem("JWT", res.JWT);
+      setJWT(res.JWT); //  updates state and localStorage with new JWT updated with 'subscrition: true' status
+    });
   }, []);
 
   return (
