@@ -5,18 +5,12 @@ import { Requests } from "../API/Requests";
 import toast from "react-hot-toast";
 import { useUserContext } from "../Providers/UserProvider";
 import { jwtDecode } from "jwt-decode";
-
 import { sendVerifyEmailToast } from "./VerifyEmailToast";
-
-type JwtPayload = {
-  id: number;
-  email: string;
-  role: "ADMIN" | "USER";
-  emailVerified: boolean;
-  iat: number;
-};
+import { JwtPayload } from "../types";
+import { rateLimitToast_multipleFailedLoginAttempts } from "../toasts";
 
 export const ExistingUserLogin = () => {
+  const [clickCount, setClickCount] = useState<number>(0);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [resendEmailSpanClickCount, setResendEmailSpanClickCount] =
@@ -32,6 +26,7 @@ export const ExistingUserLogin = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setClickCount((prev) => prev + 1);
     Requests.login(email, password).then((res) => {
       if (res.JWT) {
         const userObject = jwtDecode<JwtPayload>(res.JWT);
@@ -63,7 +58,11 @@ export const ExistingUserLogin = () => {
           );
         }
       } else {
-        toast.error("One of your login credentials is incorrect");
+        if (clickCount < 4) {
+          toast.error("One of your login credentials is incorrect");
+        } else {
+          rateLimitToast_multipleFailedLoginAttempts();
+        }
       }
     });
   };

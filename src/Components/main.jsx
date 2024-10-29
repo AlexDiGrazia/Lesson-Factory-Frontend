@@ -59,9 +59,7 @@ const router = createBrowserRouter([
         path: "/signup/payment",
         element: (
           <Root>
-            <FlexboxCenter>
-              <CheckoutForm />
-            </FlexboxCenter>
+            <CheckoutForm />
           </Root>
         ),
       },

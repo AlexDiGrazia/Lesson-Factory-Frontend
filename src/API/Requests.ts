@@ -61,4 +61,14 @@ export const Requests = {
       },
       body: JSON.stringify({ email, id }),
     }).then((res) => res.json()),
+
+  updateSubscriptionStatus: (id: number) =>
+    fetch(`${BASE_URL}/subscription`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        x_meta_function: "updateSubscriptionStatus",
+      },
+      body: JSON.stringify({ id }),
+    }).then((res) => res.json()),
 };
