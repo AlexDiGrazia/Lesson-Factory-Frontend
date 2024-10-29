@@ -3,20 +3,17 @@ import { useVideoContext } from "../Providers/videoProvider";
 import Video from "./Video";
 import VideoTitle from "./VideoTitle";
 import "../CSS/App.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useUserContext } from "../Providers/UserProvider";
 import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from "../types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const App = () => {
-  const [subscribed, setSubscribed] = useState<boolean>(false);
   const { allVideos } = useVideoContext();
-  const navigate = useNavigate();
-
-  const { JWT } = useUserContext();
+  const { JWT, subscribed, setSubscribed } = useUserContext();
 
   useEffect(() => {
     if (JWT) {
@@ -34,7 +31,9 @@ const App = () => {
   return (
     <>
       <nav className="main_app_nav">
-        <a onClick={() => navigate("/signup/payment")}>Subscribe</a>
+        <div className="user_icon_circle">
+          <FontAwesomeIcon className="user_icon" icon={faUser} />
+        </div>
       </nav>
       <div className="wrapper">
         <div className="menu_modal">
@@ -55,6 +54,20 @@ const App = () => {
             {!subscribed && (
               <div className="CTA_container">
                 <FontAwesomeIcon className="lock_icon" icon={faLock} />
+                <div className="CTA_button_wrapper">
+                  <ul>
+                    <li>
+                      <Link className="CTA_buttons" to="/signup/payment">
+                        Buy All Videos
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="CTA_buttons" to="">
+                        Buy Single Video
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </div>
             )}
             <Video />
@@ -62,14 +75,7 @@ const App = () => {
               <div
                 className="video_overlay"
                 style={{ filter: !subscribed ? "blur(2px)" : "none" }}
-              >
-                <Link className="CTA_buttons" to="">
-                  Subscribe
-                </Link>
-                <Link className="CTA_buttons" to="">
-                  Buy single video
-                </Link>
-              </div>
+              ></div>
             )}
           </div>
         </div>
