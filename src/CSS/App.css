@@ -396,6 +396,9 @@ div.emailVerificationSplash {
   color: grey;
   font-size: 48px;
   margin-left: 30px;
+}
+
+.factory_logo:hover {
   cursor: pointer;
 }
 
@@ -417,6 +420,11 @@ div.emailVerificationSplash {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  z-index: 5;
+}
+
+.user_icon_circle:hover {
+  cursor: pointer;
 }
 
 .user_icon {
@@ -424,8 +432,8 @@ div.emailVerificationSplash {
   font-size: 24px;
 }
 
-.main_app_nav:hover {
-  transition: scale(1.1);
+.user_icon:hover {
+  cursor: pointer;
 }
 
 #checkout div iframe {
@@ -443,7 +451,7 @@ div.emailVerificationSplash {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 200;
+  z-index: 2;
   /* border: 3px solid blue; */
   display: flex;
   justify-content: center;
@@ -491,4 +499,61 @@ div.emailVerificationSplash {
 .lock_icon {
   font-size: 48px;
   color: #535669;
+}
+
+.admin_nav {
+  z-index: 3;
+  position: absolute;
+  top: -21px;
+  right: 0;
+  background: #01596b;
+  border-radius: 3px;
+  padding-top: 5px;
+  transition: transform 0.2s linear;
+}
+
+.admin_nav:hover {
+  cursor: pointer;
+}
+
+/* .admin_nav {
+  z-index:3;
+  position: absolute;
+  bottom: -95px;
+  right: 36px;
+  background: #01596b;
+  border-radius: 3px;
+  padding-top: 5px;
+} */
+
+.admin_nav ul {
+  padding-right: 85px;
+  padding-left: 20px;
+}
+
+.top_li {
+  margin-top: 3px;
+}
+
+.admin_nav ul hr {
+  width: 212%;
+  position: relative;
+  margin: 0;
+  right: 0px;
+  height: 1px;
+  border: none;
+  background: #ffffff4a;
+}
+
+.admin_nav ul li {
+  text-align: left;
+  margin: 7px 0;
+  cursor: pointer;
+}
+.admin_nav ul li:hover {
+  cursor: pointer;
+}
+
+.logout {
+  /* border-top: 1px solid #f1f1f1; */
 }

@@ -7,17 +7,19 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUserContext } from "../Providers/UserProvider";
 import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from "../types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
-import { Requests } from "../API/Requests";
 import { faIndustryWindows } from "@awesome.me/kit-3e381cd6aa/icons/classic/solid";
+import { AdminMenu } from "./AdminMenu";
 
 const App = () => {
+  const [menuPosition, setMenuPosition] = useState<"hidden" | "visible">(
+    "hidden"
+  );
   const { allVideos, currentVideo } = useVideoContext();
   const {
     JWT,
-    setJWT,
     subscribed,
     setSubscribed,
     videosOwnedByUser,
@@ -60,10 +62,17 @@ const App = () => {
             navigate(`/app/${currentVideo.id}`);
           }}
         />
-        <div className="user_icon_circle">
+        <div
+          className="user_icon_circle"
+          onClick={() =>
+            setMenuPosition(menuPosition === "hidden" ? "visible" : "hidden")
+          }
+        >
           <FontAwesomeIcon className="user_icon" icon={faUser} />
         </div>
+        {/* <AdminMenu /> */}
       </nav>
+
       <div className="wrapper">
         <div className="menu_modal">
           <div className="menu">
@@ -80,6 +89,10 @@ const App = () => {
         </div>
         <div className="video-panel">
           <div className="video_modal">
+            <AdminMenu
+              menuPosition={menuPosition}
+              setMenuPosition={setMenuPosition}
+            />
             {!subscribed && !videosOwnedByUser.includes(Number(videoId)) && (
               <div className="CTA_container">
                 <FontAwesomeIcon className="lock_icon" icon={faLock} />
