@@ -3,34 +3,63 @@ import { useVideoContext } from "../Providers/videoProvider";
 import Video from "./Video";
 import VideoTitle from "./VideoTitle";
 import "../CSS/App.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUserContext } from "../Providers/UserProvider";
 import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from "../types";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
+import { Requests } from "../API/Requests";
+import { faIndustryWindows } from "@awesome.me/kit-3e381cd6aa/icons/classic/solid";
 
 const App = () => {
-  const { allVideos } = useVideoContext();
-  const { JWT, subscribed, setSubscribed } = useUserContext();
+  const { allVideos, currentVideo } = useVideoContext();
+  const {
+    JWT,
+    setJWT,
+    subscribed,
+    setSubscribed,
+    videosOwnedByUser,
+    setVideosOwnedByUser,
+  } = useUserContext();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (JWT) {
       setSubscribed(jwtDecode<JwtPayload>(JWT).subscribed);
+      setVideosOwnedByUser(jwtDecode<JwtPayload>(JWT).videosOwnedByUser);
     } else {
       const jwtFromStorage = localStorage.getItem("JWT");
       if (!jwtFromStorage) {
         console.error({ error: "No JWT in localStorage" });
         return;
       }
+      // setJWT(jwtFromStorage);
       setSubscribed(jwtDecode<JwtPayload>(jwtFromStorage).subscribed);
+      setVideosOwnedByUser(
+        jwtDecode<JwtPayload>(jwtFromStorage).videosOwnedByUser
+      );
     }
   }, []);
+
+  const { videoId } = useParams();
+
+  if (!videoId) {
+    return <div>Video ID not found</div>; // or handle this case however you need
+  }
 
   return (
     <>
       <nav className="main_app_nav">
+        <FontAwesomeIcon
+          className="factory_logo"
+          icon={faIndustryWindows}
+          onClick={() => {
+            navigate(`/app/${currentVideo.id}`);
+          }}
+        />
         <div className="user_icon_circle">
           <FontAwesomeIcon className="user_icon" icon={faUser} />
         </div>
@@ -51,18 +80,21 @@ const App = () => {
         </div>
         <div className="video-panel">
           <div className="video_modal">
-            {!subscribed && (
+            {!subscribed && !videosOwnedByUser.includes(Number(videoId)) && (
               <div className="CTA_container">
                 <FontAwesomeIcon className="lock_icon" icon={faLock} />
                 <div className="CTA_button_wrapper">
                   <ul>
                     <li>
-                      <Link className="CTA_buttons" to="/signup/payment">
-                        Buy All Videos
+                      <Link className="CTA_buttons" to="/buy_subscription">
+                        Buy Subscription
                       </Link>
                     </li>
                     <li>
-                      <Link className="CTA_buttons" to="">
+                      <Link
+                        className="CTA_buttons"
+                        to={`/buy_video/${videoId}`}
+                      >
                         Buy Single Video
                       </Link>
                     </li>
@@ -71,10 +103,15 @@ const App = () => {
               </div>
             )}
             <Video />
-            {!subscribed && (
+            {!subscribed && !videosOwnedByUser.includes(Number(videoId)) && (
               <div
                 className="video_overlay"
-                style={{ filter: !subscribed ? "blur(2px)" : "none" }}
+                style={{
+                  filter:
+                    !subscribed && !videosOwnedByUser.includes(Number(videoId))
+                      ? "blur(2px)"
+                      : "none",
+                }}
               ></div>
             )}
           </div>
