@@ -4,6 +4,12 @@ export type TVideo = {
   title: string;
 };
 
+export type VideoPurchase = {
+  id: number;
+  userId: number;
+  videoId: number;
+};
+
 export type JwtPayload = {
   id: number;
   email: string;
@@ -11,4 +17,5 @@ export type JwtPayload = {
   emailVerified: boolean;
   subscribed: boolean;
   iat: number;
+  videosOwnedByUser: number[];
 };
