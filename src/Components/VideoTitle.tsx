@@ -21,7 +21,6 @@ const VideoTitle = ({ title, filename, id }: TVideoTitleProps) => {
               "videoLastWatched",
               JSON.stringify({ title, filename, id })
             );
-            console.log("ok cool");
             setCurrentVideo({ title, filename, id });
             navigate(`/app/${id}`);
           });
