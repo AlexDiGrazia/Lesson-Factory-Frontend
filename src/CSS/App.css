@@ -242,7 +242,8 @@ nav ul li svg {
 
 .video-title {
   padding: 10px 0px 10px 40px;
-  border-bottom: 1px solid white;
+  /* border-bottom: 1px solid white; */
+  border-bottom: 1px solid #01596b;
   display: flex;
   align-items: center;
   font-size: 18px;
@@ -388,6 +389,14 @@ div.emailVerificationSplash {
   border-bottom: 1px solid #404040;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.factory_logo {
+  color: grey;
+  font-size: 48px;
+  margin-left: 30px;
+  cursor: pointer;
 }
 
 .main_app_nav a {
