@@ -13,6 +13,8 @@ type TUserContext = {
   setJWT: Dispatch<SetStateAction<string>>;
   subscribed: boolean;
   setSubscribed: Dispatch<SetStateAction<boolean>>;
+  videosOwnedByUser: number[];
+  setVideosOwnedByUser: Dispatch<SetStateAction<number[]>>;
 };
 
 const UserContext = createContext<TUserContext>({} as TUserContext);
@@ -20,6 +22,7 @@ const UserContext = createContext<TUserContext>({} as TUserContext);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [JWT, setJWT] = useState<string>("");
   const [subscribed, setSubscribed] = useState<boolean>(false);
+  const [videosOwnedByUser, setVideosOwnedByUser] = useState<number[]>([]);
 
   const jwtFromStorage = localStorage.getItem("JWT");
   const pageWasRefreshed = JWT === "" && jwtFromStorage;
@@ -31,7 +34,16 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   });
 
   return (
-    <UserContext.Provider value={{ JWT, setJWT, subscribed, setSubscribed }}>
+    <UserContext.Provider
+      value={{
+        JWT,
+        setJWT,
+        subscribed,
+        setSubscribed,
+        videosOwnedByUser,
+        setVideosOwnedByUser,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
