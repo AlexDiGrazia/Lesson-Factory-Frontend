@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import ReactDOM from "react-dom/client";
 import "../CSS/index.css";
 import App from "./App";
@@ -15,7 +15,8 @@ import { LandingPage } from "./LandingPage";
 import { EmailVerificationSplash } from "./EmailVerificationSplash";
 import { Toaster } from "react-hot-toast";
 import { CheckoutForm } from "./CheckoutForm";
-import { PaymentConfirmation } from "./PaymentConfirmation";
+import { SubscriptionConfirmation } from "./SubscriptionConfirmation";
+import { PurchaseConfirmation } from "./PurchaseConfirmation";
 
 const router = createBrowserRouter([
   {
@@ -56,19 +57,45 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/signup/payment",
+        path: "/buy_subscription",
         element: (
           <Root>
-            <CheckoutForm />
+            <CheckoutForm
+              priceId="price_1QDhp72NGxzi9IJzeoDYcTfy"
+              mode="subscription"
+              return_url="buy_subscription/confirmation"
+            />
           </Root>
         ),
       },
       {
-        path: "/signup/payment/confirmation",
+        path: "/buy_video/:videoId",
+        element: (
+          <Root>
+            <CheckoutForm
+              priceId="price_1QFrFU2NGxzi9IJzsPUosxeg"
+              mode="payment"
+              return_url="buy_video/confirmation"
+            />
+          </Root>
+        ),
+      },
+      {
+        path: "/buy_subscription/confirmation",
         element: (
           <Root>
             <FlexboxCenter>
-              <PaymentConfirmation />
+              <SubscriptionConfirmation />
+            </FlexboxCenter>
+          </Root>
+        ),
+      },
+      {
+        path: "/buy_video/confirmation/:videoId",
+        element: (
+          <Root>
+            <FlexboxCenter>
+              <PurchaseConfirmation />
             </FlexboxCenter>
           </Root>
         ),
@@ -101,10 +128,8 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <UserProvider>
-      <Toaster />
-      <RouterProvider router={router} />
-    </UserProvider>
-  </React.StrictMode>
+  <UserProvider>
+    <Toaster />
+    <RouterProvider router={router} />
+  </UserProvider>
 );
