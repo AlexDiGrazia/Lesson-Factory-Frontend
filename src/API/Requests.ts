@@ -63,12 +63,22 @@ export const Requests = {
     }).then((res) => res.json()),
 
   updateSubscriptionStatus: (id: number) =>
-    fetch(`${BASE_URL}/subscription`, {
+    fetch(`${BASE_URL}/buy/subscription`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         x_meta_function: "updateSubscriptionStatus",
       },
       body: JSON.stringify({ id }),
+    }).then((res) => res.json()),
+
+  purchaseVideo: (userId: number, videoId: number) =>
+    fetch(`${BASE_URL}/buy/single_video`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        x_meta_function: "updateSubscriptionStatus",
+      },
+      body: JSON.stringify({ userId, videoId }),
     }).then((res) => res.json()),
 };
