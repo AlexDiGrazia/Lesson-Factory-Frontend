@@ -3,17 +3,25 @@ import { useVideoContext } from "../Providers/videoProvider";
 import { useUserContext } from "../Providers/UserProvider";
 import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from "../types";
+import { useParams } from "react-router-dom";
 
 const Video = () => {
   const [refreshCount, setRefreshCount] = useState<number>(1);
-  const [subscribed, setSubscribed] = useState<boolean>(false);
+  // const [subscribed, setSubscribed] = useState<boolean>(false);
 
   const { currentVideo, signedMp4Url, signedWebmUrl, sign } = useVideoContext();
-  const { JWT } = useUserContext();
+  const { JWT, subscribed, videosOwnedByUser, setSubscribed } =
+    useUserContext();
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   if (videoRef.current !== null) {
     videoRef.current.currentTime = 30;
+  }
+
+  const { videoId } = useParams();
+
+  if (!videoId) {
+    return <div>Video ID not found</div>; // or handle this case however you need
   }
 
   const handleSeek = () => {
@@ -41,6 +49,7 @@ const Video = () => {
       }
       setSubscribed(jwtDecode<JwtPayload>(jwtFromStorage).subscribed);
     }
+    // TODO already being set by parent <App /> component might not be important
   }, []);
 
   return (
@@ -54,7 +63,12 @@ const Video = () => {
         // controls={user.subscribed === true}
         controls
         onSeeking={handleSeek}
-        style={{ filter: !subscribed ? "blur(2px)" : "none" }}
+        style={{
+          filter:
+            !subscribed && !videosOwnedByUser.includes(Number(videoId))
+              ? "blur(2px)"
+              : "none",
+        }}
       >
         {signedMp4Url !== "" && <source src={signedMp4Url} type="video/mp4" />}
         {signedWebmUrl !== "" && (
