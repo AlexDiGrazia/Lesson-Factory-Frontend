@@ -81,4 +81,14 @@ export const Requests = {
       },
       body: JSON.stringify({ userId, videoId }),
     }).then((res) => res.json()),
+
+  createCustomerPortalSession: () =>
+    fetch(`${BASE_URL}/create_customer_portal_session`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        x_meta_function: "createCustomerPortalSession",
+      },
+      body: JSON.stringify({}),
+    }).then((res) => res.json()),
 };
