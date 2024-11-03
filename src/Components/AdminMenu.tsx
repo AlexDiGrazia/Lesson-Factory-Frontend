@@ -18,10 +18,12 @@ export const AdminMenu = ({
       <nav
         className="admin_nav"
         style={{
-          transform: menuPosition === "hidden" ? "translateY(-103px)" : "none",
+          transform: menuPosition === "hidden" ? "translateY(-136px)" : "none",
         }}
       >
         <ul>
+          <li className="top_li">Your Videos</li>
+          <hr />
           <li className="top_li">Account</li>
           <hr />
           <li

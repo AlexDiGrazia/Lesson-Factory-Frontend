@@ -504,7 +504,7 @@ div.emailVerificationSplash {
 .admin_nav {
   z-index: 3;
   position: absolute;
-  top: -21px;
+  top: -16px;
   right: 0;
   background: #01596b;
   border-radius: 3px;
@@ -536,7 +536,7 @@ div.emailVerificationSplash {
 }
 
 .admin_nav ul hr {
-  width: 212%;
+  width: 178%;
   position: relative;
   margin: 0;
   right: 0px;
