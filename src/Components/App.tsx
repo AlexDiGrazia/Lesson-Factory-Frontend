@@ -17,6 +17,9 @@ const App = () => {
   const [menuPosition, setMenuPosition] = useState<"hidden" | "visible">(
     "hidden"
   );
+  const [display, setDisplay] = useState<"video_dashboard" | "your_videos">(
+    "video_dashboard"
+  );
   const { allVideos, currentVideo } = useVideoContext();
   const {
     JWT,
@@ -70,66 +73,73 @@ const App = () => {
         >
           <FontAwesomeIcon className="user_icon" icon={faUser} />
         </div>
-        {/* <AdminMenu /> */}
       </nav>
+      {/* <AdminMenu
+        menuPosition={menuPosition}
+        setMenuPosition={setMenuPosition}
+      /> */}
 
-      <div className="wrapper">
-        <div className="menu_modal">
-          <div className="menu">
-            {allVideos.length > 0 &&
-              allVideos?.map((obj) => (
-                <VideoTitle
-                  key={`video_key_${obj.id}`}
-                  title={obj.title}
-                  filename={obj.filename}
-                  id={obj.id}
-                />
-              ))}
+      {display === "video_dashboard" && (
+        <div className="wrapper">
+          <div className="menu_modal">
+            <div className="menu">
+              {allVideos.length > 0 &&
+                allVideos?.map((obj) => (
+                  <VideoTitle
+                    key={`video_key_${obj.id}`}
+                    title={obj.title}
+                    filename={obj.filename}
+                    id={obj.id}
+                  />
+                ))}
+            </div>
           </div>
-        </div>
-        <div className="video-panel">
-          <div className="video_modal">
-            <AdminMenu
-              menuPosition={menuPosition}
-              setMenuPosition={setMenuPosition}
-            />
-            {!subscribed && !videosOwnedByUser.includes(Number(videoId)) && (
-              <div className="CTA_container">
-                <FontAwesomeIcon className="lock_icon" icon={faLock} />
-                <div className="CTA_button_wrapper">
-                  <ul>
-                    <li>
-                      <Link className="CTA_buttons" to="/buy_subscription">
-                        Buy Subscription
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="CTA_buttons"
-                        to={`/buy_video/${videoId}`}
-                      >
-                        Buy Single Video
-                      </Link>
-                    </li>
-                  </ul>
+
+          <div className="video-panel">
+            <div className="video_modal">
+              <AdminMenu
+                menuPosition={menuPosition}
+                setMenuPosition={setMenuPosition}
+              />
+              {!subscribed && !videosOwnedByUser.includes(Number(videoId)) && (
+                <div className="CTA_container">
+                  <FontAwesomeIcon className="lock_icon" icon={faLock} />
+                  <div className="CTA_button_wrapper">
+                    <ul>
+                      <li>
+                        <Link className="CTA_buttons" to="/buy_subscription">
+                          Buy Subscription
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="CTA_buttons"
+                          to={`/buy_video/${videoId}`}
+                        >
+                          Buy Single Video
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            )}
-            <Video />
-            {!subscribed && !videosOwnedByUser.includes(Number(videoId)) && (
-              <div
-                className="video_overlay"
-                style={{
-                  filter:
-                    !subscribed && !videosOwnedByUser.includes(Number(videoId))
-                      ? "blur(2px)"
-                      : "none",
-                }}
-              ></div>
-            )}
+              )}
+              <Video />
+              {!subscribed && !videosOwnedByUser.includes(Number(videoId)) && (
+                <div
+                  className="video_overlay"
+                  style={{
+                    filter:
+                      !subscribed &&
+                      !videosOwnedByUser.includes(Number(videoId))
+                        ? "blur(2px)"
+                        : "none",
+                  }}
+                ></div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
