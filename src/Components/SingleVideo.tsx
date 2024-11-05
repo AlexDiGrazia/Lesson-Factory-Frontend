@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Requests } from "../API/Requests";
 import { useUserContext } from "../Providers/UserProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,9 +7,15 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 export const SingleVideo = ({
   filename,
   title,
+  id,
+  setModalVideo,
+  setModalVisible,
 }: {
   filename: string;
   title: string;
+  id: number;
+  setModalVideo: Dispatch<SetStateAction<string>>;
+  setModalVisible: Dispatch<SetStateAction<boolean>>;
 }) => {
   const [signedMp4Url, setSignedMp4Url] = useState<string>("");
   const [signedWebmUrl, setSignedWebmUrl] = useState<string>("");
@@ -44,7 +50,13 @@ export const SingleVideo = ({
   return (
     <>
       <div className="single_video_wrapper">
-        <div className="play_button_circle">
+        <div
+          className="play_button_circle"
+          onClick={() => {
+            setModalVideo(filename);
+            setModalVisible(true);
+          }}
+        >
           <FontAwesomeIcon icon={faPlay} className="play_button" />
         </div>
         <video

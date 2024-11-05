@@ -10,9 +10,13 @@ import { SingleVideo } from "./SingleVideo";
 export const YourVideos = ({
   setDisplay,
   currentVideo,
+  setModalVideo,
+  setModalVisible,
 }: {
   setDisplay: Dispatch<SetStateAction<"video_dashboard" | "your_videos">>;
   currentVideo: TVideo;
+  setModalVideo: Dispatch<SetStateAction<string>>;
+  setModalVisible: Dispatch<SetStateAction<boolean>>;
 }) => {
   const [allVideos, setAllVideos] = useState<TVideo[]>([]);
   const navigate = useNavigate();
@@ -43,13 +47,14 @@ export const YourVideos = ({
         </nav>
         <div className="videos_flex_container">
           {allVideos.map((obj) => (
-            <SingleVideo filename={obj.filename} title={obj.title} />
+            <SingleVideo
+              filename={obj.filename}
+              title={obj.title}
+              id={obj.id}
+              setModalVideo={setModalVideo}
+              setModalVisible={setModalVisible}
+            />
           ))}
-          {/* <div className="video_box"></div>
-          <div className="video_box"></div>
-          <div className="video_box"></div>
-          <div className="video_box"></div>
-          <div className="video_box"></div> */}
         </div>
       </div>
     </>

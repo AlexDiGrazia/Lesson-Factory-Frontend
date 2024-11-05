@@ -7,11 +7,12 @@ import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from "../types";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faX } from "@fortawesome/free-solid-svg-icons";
 import { faIndustryWindows } from "@awesome.me/kit-3e381cd6aa/icons/classic/solid";
 import { AdminMenu } from "./AdminMenu";
 import { VideoDashboard } from "./VideoDashboard";
 import { YourVideos } from "./YourVideos";
+import { VideoPlayerModal } from "./VideoPlayerModal";
 
 const App = () => {
   const [menuPosition, setMenuPosition] = useState<"hidden" | "visible">(
@@ -20,6 +21,8 @@ const App = () => {
   const [display, setDisplay] = useState<"video_dashboard" | "your_videos">(
     "video_dashboard"
   );
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [modalVideo, setModalVideo] = useState<string>("");
   const { allVideos, currentVideo } = useVideoContext();
   const {
     JWT,
@@ -50,6 +53,19 @@ const App = () => {
 
   return (
     <>
+      {modalVisible && (
+        <div className="videoPlayerModal_centeringContainer">
+          <FontAwesomeIcon
+            icon={faX}
+            className="videoPlayerModal_exitButton"
+            onClick={() => setModalVisible(false)}
+          />
+          <VideoPlayerModal
+            filename={modalVideo}
+            setModalVisible={setModalVisible}
+          />
+        </div>
+      )}
       <nav className="main_app_nav">
         <FontAwesomeIcon
           className="factory_logo"
@@ -94,7 +110,12 @@ const App = () => {
         )}
         {display === "your_videos" && (
           <>
-            <YourVideos setDisplay={setDisplay} currentVideo={currentVideo} />
+            <YourVideos
+              setDisplay={setDisplay}
+              currentVideo={currentVideo}
+              setModalVideo={setModalVideo}
+              setModalVisible={setModalVisible}
+            />
           </>
         )}
       </div>

@@ -16,7 +16,7 @@ export const AdminMenu = ({
 }) => {
   const navigate = useNavigate();
   const { setJWT, setSubscribed, setVideosOwnedByUser } = useUserContext();
-  // const { setSignedMp4Url, setSignedWebmUrl } = useVideoContext();
+  const { setSignedMp4Url, setSignedWebmUrl } = useVideoContext();
 
   return (
     <>
@@ -31,11 +31,7 @@ export const AdminMenu = ({
           <li
             className="top_li"
             onClick={() => {
-              setDisplay(
-                display === "video_dashboard"
-                  ? "your_videos"
-                  : "video_dashboard"
-              );
+              setDisplay("your_videos");
               setMenuPosition("hidden");
               navigate("/app/your_videos");
             }}
@@ -51,8 +47,8 @@ export const AdminMenu = ({
               setJWT("");
               setSubscribed(false);
               setVideosOwnedByUser([]);
-              // setSignedMp4Url("");
-              // setSignedWebmUrl("");
+              setSignedMp4Url("");
+              setSignedWebmUrl("");
 
               ["JWT", "email", "userId", "videosOwnedByUser"].forEach((key) =>
                 localStorage.removeItem(key)
