@@ -5,13 +5,18 @@ import { Dispatch, SetStateAction } from "react";
 
 export const AdminMenu = ({
   menuPosition,
+  setMenuPosition,
+  display,
+  setDisplay,
 }: {
   menuPosition: "hidden" | "visible";
   setMenuPosition: Dispatch<SetStateAction<"hidden" | "visible">>;
+  display: "video_dashboard" | "your_videos";
+  setDisplay: Dispatch<SetStateAction<"video_dashboard" | "your_videos">>;
 }) => {
   const navigate = useNavigate();
   const { setJWT, setSubscribed, setVideosOwnedByUser } = useUserContext();
-  const { setSignedMp4Url, setSignedWebmUrl } = useVideoContext();
+  // const { setSignedMp4Url, setSignedWebmUrl } = useVideoContext();
 
   return (
     <>
@@ -19,10 +24,24 @@ export const AdminMenu = ({
         className="admin_nav"
         style={{
           transform: menuPosition === "hidden" ? "translateY(-136px)" : "none",
+          // top: display === "your_videos" ? "0px" : "2px",
         }}
       >
         <ul>
-          <li className="top_li">Your Videos</li>
+          <li
+            className="top_li"
+            onClick={() => {
+              setDisplay(
+                display === "video_dashboard"
+                  ? "your_videos"
+                  : "video_dashboard"
+              );
+              setMenuPosition("hidden");
+              navigate("/app/your_videos");
+            }}
+          >
+            Your Videos
+          </li>
           <hr />
           <li className="top_li">Account</li>
           <hr />
@@ -32,8 +51,8 @@ export const AdminMenu = ({
               setJWT("");
               setSubscribed(false);
               setVideosOwnedByUser([]);
-              setSignedMp4Url("");
-              setSignedWebmUrl("");
+              // setSignedMp4Url("");
+              // setSignedWebmUrl("");
 
               ["JWT", "email", "userId", "videosOwnedByUser"].forEach((key) =>
                 localStorage.removeItem(key)

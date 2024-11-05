@@ -267,7 +267,7 @@ nav ul li svg {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 95%;
+  width: 97%;
   height: 95%;
   background: #a1a1a117;
   position: relative;
@@ -280,6 +280,65 @@ nav ul li svg {
   box-shadow: 0 6px 30px -2px #0000004a;
   position: relative;
   object-fit: cover;
+}
+
+.single_video_wrapper {
+  display: flex;
+  width: 300px;
+  height: 300px;
+  margin: 50px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: max-content;
+  background: grey;
+  /* border-radius: 50px; */
+  border-radius: 25px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.single_video_wrapper h2 {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 7px;
+  background: #000000c7;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0 5px black;
+}
+
+.video_owned_by_user {
+  /* border-radius: 50px; */
+  border-radius: 25px;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.play_button_circle {
+  border: 1px solid black;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: #01596bc7;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s linear;
+}
+
+.play_button_circle:hover {
+  transform: scale(1.1);
+}
+
+.play_button {
+  position: relative;
+  font-size: 48px;
+  left: 4px;
 }
 
 .video_overlay {
@@ -504,8 +563,8 @@ div.emailVerificationSplash {
 .admin_nav {
   z-index: 3;
   position: absolute;
-  top: -16px;
-  right: 0;
+  top: 2px;
+  right: 2%;
   background: #01596b;
   border-radius: 3px;
   padding-top: 5px;
@@ -557,4 +616,40 @@ div.emailVerificationSplash {
 
 .logout {
   /* border-top: 1px solid #f1f1f1; */
+}
+
+.your_videos_container {
+  width: 97.8vw;
+  height: 95%;
+  background: #a1a1a117;
+  position: relative;
+}
+
+.your_videos_nav {
+  height: 20px;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: end;
+  padding: 14px 0 5px 0;
+}
+
+.videos_flex_container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.video_box {
+  width: 200px;
+  height: 200px;
+  margin: 50px;
+  background-color: rgb(78, 78, 164);
 }

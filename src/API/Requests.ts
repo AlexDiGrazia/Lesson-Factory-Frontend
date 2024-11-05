@@ -11,6 +11,17 @@ export const Requests = {
       },
     }).then((res) => res.json()),
 
+  getVideosOwnedByUser: (JWT: string, videosOwnedByUser: number[]) =>
+    fetch(`${BASE_URL}/videos/owned_by_user`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + JWT,
+        x_meta_function: "getVideosOwnedByUsers",
+      },
+      body: JSON.stringify({ videosOwnedByUser }),
+    }).then((res) => res.json()),
+
   getFirstVideoInTable: (JWT: string) =>
     fetch(`${BASE_URL}/videos/firstVideo`, {
       method: "GET",

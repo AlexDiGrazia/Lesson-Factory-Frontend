@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 
 const Video = () => {
   const [refreshCount, setRefreshCount] = useState<number>(1);
-  // const [subscribed, setSubscribed] = useState<boolean>(false);
 
   const { currentVideo, signedMp4Url, signedWebmUrl, sign } = useVideoContext();
   const { JWT, subscribed, videosOwnedByUser, setSubscribed } =

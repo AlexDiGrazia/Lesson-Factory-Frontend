@@ -123,6 +123,15 @@ const router = createBrowserRouter([
           </VideoProvider>
         ),
       },
+      {
+        path: "/app/your_videos",
+
+        element: (
+          <VideoProvider>
+            <App />
+          </VideoProvider>
+        ),
+      },
     ],
   },
 ]);
