@@ -34,8 +34,11 @@ const App = () => {
 
   const navigate = useNavigate();
 
+  let useThisJwt: string;
+
   useEffect(() => {
     if (JWT) {
+      useThisJwt = JWT;
       setSubscribed(jwtDecode<JwtPayload>(JWT).subscribed);
       setVideosOwnedByUser(jwtDecode<JwtPayload>(JWT).videosOwnedByUser);
     } else {
@@ -44,6 +47,7 @@ const App = () => {
         console.error({ error: "No JWT in localStorage" });
         return;
       }
+      useThisJwt = JWT;
       setSubscribed(jwtDecode<JwtPayload>(jwtFromStorage).subscribed);
       setVideosOwnedByUser(
         jwtDecode<JwtPayload>(jwtFromStorage).videosOwnedByUser
@@ -74,13 +78,16 @@ const App = () => {
             navigate(`/app/${currentVideo.id}`);
           }}
         />
-        <div
-          className="user_icon_circle"
-          onClick={() =>
-            setMenuPosition(menuPosition === "hidden" ? "visible" : "hidden")
-          }
-        >
-          <FontAwesomeIcon className="user_icon" icon={faUser} />
+        <div className="nav-right-container">
+          {jwtDecode<JwtPayload>(JWT).role === "ADMIN" && <span>Upload</span>}
+          <div
+            className="user_icon_circle"
+            onClick={() =>
+              setMenuPosition(menuPosition === "hidden" ? "visible" : "hidden")
+            }
+          >
+            <FontAwesomeIcon className="user_icon" icon={faUser} />
+          </div>
         </div>
       </nav>
 

@@ -704,3 +704,20 @@ div.emailVerificationSplash {
   margin: 50px;
   background-color: rgb(78, 78, 164);
 }
+
+.nav-right-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.nav-right-container span {
+  margin-right: 100px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s linear;
+}
+
+.nav-right-container span:hover {
+  transform: scale(1.05);
+}
