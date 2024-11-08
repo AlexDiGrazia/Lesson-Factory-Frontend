@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { useUserContext } from "../Providers/UserProvider";
 import { Requests } from "../API/Requests";
+import { useNavigate } from "react-router-dom";
 
 export const VideoPlayerModal = ({
   filename,
@@ -15,6 +16,7 @@ export const VideoPlayerModal = ({
   const cloudfrontDistribution = import.meta.env.VITE_CLOUDFRONT_DISTRIBUTION;
 
   const { JWT } = useUserContext();
+  const navigate = useNavigate();
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -69,6 +71,7 @@ export const VideoPlayerModal = ({
         onClick={() => {
           setModalVisible(false);
           handlePause();
+          navigate("/app/your_videos");
         }}
       ></div>
     </>

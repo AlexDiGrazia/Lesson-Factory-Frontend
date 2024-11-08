@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { useVideoContext } from "../Providers/videoProvider";
 import "../CSS/App.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useUserContext } from "../Providers/UserProvider";
 import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from "../types";
@@ -13,6 +13,7 @@ import { AdminMenu } from "./AdminMenu";
 import { VideoDashboard } from "./VideoDashboard";
 import { YourVideos } from "./YourVideos";
 import { VideoPlayerModal } from "./VideoPlayerModal";
+import { Requests } from "../API/Requests";
 
 const App = () => {
   const [menuPosition, setMenuPosition] = useState<"hidden" | "visible">(
@@ -26,6 +27,7 @@ const App = () => {
   const { allVideos, currentVideo } = useVideoContext();
   const {
     JWT,
+    setJWT,
     subscribed,
     setSubscribed,
     videosOwnedByUser,
@@ -33,12 +35,14 @@ const App = () => {
   } = useUserContext();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
-  let useThisJwt: string;
+  if (/^\/app\/your_videos\/\d+$/.test(location.pathname)) {
+  }
+  const { videoId } = useParams();
 
   useEffect(() => {
     if (JWT) {
-      useThisJwt = JWT;
       setSubscribed(jwtDecode<JwtPayload>(JWT).subscribed);
       setVideosOwnedByUser(jwtDecode<JwtPayload>(JWT).videosOwnedByUser);
     } else {
@@ -47,11 +51,35 @@ const App = () => {
         console.error({ error: "No JWT in localStorage" });
         return;
       }
-      useThisJwt = JWT;
+      setJWT(jwtFromStorage);
       setSubscribed(jwtDecode<JwtPayload>(jwtFromStorage).subscribed);
       setVideosOwnedByUser(
         jwtDecode<JwtPayload>(jwtFromStorage).videosOwnedByUser
       );
+    }
+
+    if (location.pathname.includes("/app/your_videos")) {
+      setDisplay("your_videos");
+    }
+
+    if (/^\/app\/your_videos\/\d+$/.test(location.pathname)) {
+      console.log("success");
+      const jwtFromStorage = localStorage.getItem("JWT");
+      if (!jwtFromStorage) {
+        console.error({
+          error:
+            "missing videoId or jwtFromStorage when refreshing videoPlayerPortal",
+        });
+        return;
+      }
+      const token = JWT ? JWT : jwtFromStorage;
+      if (!videoId) return;
+      console.log({ token });
+      console.log({ videoId });
+      Requests.getVideoById(token, +videoId).then((video) => {
+        setModalVideo(video.filename);
+        setModalVisible(true);
+      });
     }
   }, []);
 
@@ -62,7 +90,10 @@ const App = () => {
           <FontAwesomeIcon
             icon={faX}
             className="videoPlayerModal_exitButton"
-            onClick={() => setModalVisible(false)}
+            onClick={() => {
+              setModalVisible(false);
+              navigate("/app/your_videos");
+            }}
           />
           <VideoPlayerModal
             filename={modalVideo}
@@ -79,7 +110,9 @@ const App = () => {
           }}
         />
         <div className="nav-right-container">
-          {jwtDecode<JwtPayload>(JWT).role === "ADMIN" && <span>Upload</span>}
+          {JWT && jwtDecode<JwtPayload>(JWT).role === "ADMIN" && (
+            <span>Upload</span>
+          )}
           <div
             className="user_icon_circle"
             onClick={() =>

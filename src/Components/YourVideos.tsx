@@ -48,6 +48,7 @@ export const YourVideos = ({
         <div className="videos_flex_container">
           {allVideos.map((obj) => (
             <SingleVideo
+              key={`single_video_key_${obj.id}`}
               filename={obj.filename}
               title={obj.title}
               id={obj.id}

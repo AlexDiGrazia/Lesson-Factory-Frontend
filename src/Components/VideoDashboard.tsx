@@ -16,7 +16,7 @@ export const VideoDashboard = ({
 }) => {
   const { videoId } = useParams();
   if (!videoId) {
-    return <div>Video ID not found</div>; // or handle this case however you need
+    return <div>Video ID not found freak bitches</div>; // or handle this case however you need
   }
   return (
     <>

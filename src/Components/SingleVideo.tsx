@@ -3,6 +3,7 @@ import { Requests } from "../API/Requests";
 import { useUserContext } from "../Providers/UserProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 export const SingleVideo = ({
   filename,
@@ -23,6 +24,7 @@ export const SingleVideo = ({
   const cloudfrontDistribution = import.meta.env.VITE_CLOUDFRONT_DISTRIBUTION;
 
   const { JWT } = useUserContext();
+  const navigate = useNavigate();
 
   const sign = (filename: string) => {
     return new Promise<void>(async (resolve, reject) => {
@@ -55,6 +57,7 @@ export const SingleVideo = ({
           onClick={() => {
             setModalVideo(filename);
             setModalVisible(true);
+            navigate(`/app/your_videos/${id}`);
           }}
         >
           <FontAwesomeIcon icon={faPlay} className="play_button" />
