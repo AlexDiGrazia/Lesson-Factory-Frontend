@@ -14,14 +14,15 @@ import { VideoDashboard } from "./VideoDashboard";
 import { YourVideos } from "./YourVideos";
 import { VideoPlayerModal } from "./VideoPlayerModal";
 import { Requests } from "../API/Requests";
+import { UploadForm } from "./UploadForm";
 
 const App = () => {
   const [menuPosition, setMenuPosition] = useState<"hidden" | "visible">(
     "hidden"
   );
-  const [display, setDisplay] = useState<"video_dashboard" | "your_videos">(
-    "video_dashboard"
-  );
+  const [display, setDisplay] = useState<
+    "video_dashboard" | "your_videos" | "upload_form"
+  >("video_dashboard");
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [modalVideo, setModalVideo] = useState<string>("");
   const { allVideos, currentVideo } = useVideoContext();
@@ -63,7 +64,6 @@ const App = () => {
     }
 
     if (/^\/app\/your_videos\/\d+$/.test(location.pathname)) {
-      console.log("success");
       const jwtFromStorage = localStorage.getItem("JWT");
       if (!jwtFromStorage) {
         console.error({
@@ -74,8 +74,7 @@ const App = () => {
       }
       const token = JWT ? JWT : jwtFromStorage;
       if (!videoId) return;
-      console.log({ token });
-      console.log({ videoId });
+
       Requests.getVideoById(token, +videoId).then((video) => {
         setModalVideo(video.filename);
         setModalVisible(true);
@@ -111,7 +110,7 @@ const App = () => {
         />
         <div className="nav-right-container">
           {JWT && jwtDecode<JwtPayload>(JWT).role === "ADMIN" && (
-            <span>Upload</span>
+            <span onClick={() => setDisplay("upload_form")}>Upload</span>
           )}
           <div
             className="user_icon_circle"
@@ -127,10 +126,19 @@ const App = () => {
       <div
         className="wrapper"
         style={{
-          justifyContent: display === "your_videos" ? "center" : "initial",
-          alignItems: display === "your_videos" ? "center" : "initial",
+          justifyContent:
+            display === "your_videos" || display === "upload_form"
+              ? "center"
+              : "initial",
+          alignItems:
+            display === "your_videos" || display === "upload_form"
+              ? "center"
+              : "initial",
           // top: display === "your_videos" ? "11.5%" : "11%",
-          paddingTop: display === "your_videos" ? "2px" : "0px",
+          paddingTop:
+            display === "your_videos" || display === "upload_form"
+              ? "2px"
+              : "0px",
         }}
       >
         <AdminMenu
@@ -157,6 +165,9 @@ const App = () => {
               setModalVisible={setModalVisible}
             />
           </>
+        )}
+        {display === "upload_form" && (
+          <UploadForm setDisplay={setDisplay} currentVideo={currentVideo} />
         )}
       </div>
     </>

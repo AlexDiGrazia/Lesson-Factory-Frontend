@@ -13,7 +13,9 @@ export const YourVideos = ({
   setModalVideo,
   setModalVisible,
 }: {
-  setDisplay: Dispatch<SetStateAction<"video_dashboard" | "your_videos">>;
+  setDisplay: Dispatch<
+    SetStateAction<"video_dashboard" | "your_videos" | "upload_form">
+  >;
   currentVideo: TVideo;
   setModalVideo: Dispatch<SetStateAction<string>>;
   setModalVisible: Dispatch<SetStateAction<boolean>>;

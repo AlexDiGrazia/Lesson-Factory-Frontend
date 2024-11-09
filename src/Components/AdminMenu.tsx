@@ -11,8 +11,10 @@ export const AdminMenu = ({
 }: {
   menuPosition: "hidden" | "visible";
   setMenuPosition: Dispatch<SetStateAction<"hidden" | "visible">>;
-  display: "video_dashboard" | "your_videos";
-  setDisplay: Dispatch<SetStateAction<"video_dashboard" | "your_videos">>;
+  display: "video_dashboard" | "your_videos" | "upload_form";
+  setDisplay: Dispatch<
+    SetStateAction<"video_dashboard" | "your_videos" | "upload_form">
+  >;
 }) => {
   const navigate = useNavigate();
   const { setJWT, setSubscribed, setVideosOwnedByUser } = useUserContext();

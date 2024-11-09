@@ -669,7 +669,8 @@ div.emailVerificationSplash {
   /* border-top: 1px solid #f1f1f1; */
 }
 
-.your_videos_container {
+.your_videos_container,
+.upload_form_container {
   width: 97.8vw;
   height: 95%;
   background: #a1a1a117;
@@ -683,6 +684,9 @@ div.emailVerificationSplash {
   display: flex;
   justify-content: end;
   padding: 14px 0 5px 0;
+}
+
+.upload_form_container {
 }
 
 .videos_flex_container {
