@@ -32,7 +32,9 @@ export const UploadForm = ({
             </li>
           </ul>
         </nav>
-        <NewPost />
+        <div className="newPost_flex_container">
+          <NewPost />
+        </div>
       </div>
     </>
   );

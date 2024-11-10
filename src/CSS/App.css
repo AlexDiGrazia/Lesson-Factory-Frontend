@@ -687,6 +687,14 @@ div.emailVerificationSplash {
 }
 
 .upload_form_container {
+  overflow: hidden;
+}
+
+.newPost_flex_container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .videos_flex_container {
