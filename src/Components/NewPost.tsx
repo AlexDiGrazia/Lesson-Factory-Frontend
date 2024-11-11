@@ -4,7 +4,7 @@ import { useUserContext } from "../Providers/UserProvider";
 
 export const NewPost = () => {
   const [file, setFile] = useState<File | undefined>();
-  const [caption, setCaption] = useState("");
+  const [title, setTitle] = useState("");
 
   const { JWT } = useUserContext();
 
@@ -18,7 +18,7 @@ export const NewPost = () => {
 
     const formData = new FormData();
     formData.append("image", file);
-    formData.append("caption", caption);
+    formData.append("title", title);
     await fetch(`${BASE_URL}/upload`, {
       method: "POST",
       // Read on stack overflow that multipart/form-data is inferred with fetch, and that including it explicitly causes problems
@@ -30,13 +30,14 @@ export const NewPost = () => {
       body: formData,
     }).then(() => {
       setFile(undefined);
-      setCaption("");
+      setTitle("");
     });
   };
 
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit} className="popup_box_default">
       <input
+        className="file_input"
         onChange={(e) => {
           if (e.target.files !== null) {
             console.log(e.target.files[0].size);
@@ -47,12 +48,12 @@ export const NewPost = () => {
         accept="image/*,video/*"
       />
       <input
-        value={caption}
-        onChange={(e) => setCaption(e.target.value)}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         type="text"
-        placeholder="caption"
+        placeholder="Title"
       />
-      <button type="submit">Submit</button>
+      <input type="submit" className="submit" value="Submit" />
     </form>
   );
 };

@@ -665,10 +665,6 @@ div.emailVerificationSplash {
   cursor: pointer;
 }
 
-.logout {
-  /* border-top: 1px solid #f1f1f1; */
-}
-
 .your_videos_container,
 .upload_form_container {
   width: 97.8vw;
@@ -695,6 +691,22 @@ div.emailVerificationSplash {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.newPost_flex_container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.newPost_flex_container form input {
+  margin-bottom: 10px;
+  width: 200px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.newPost_flex_container form .file_input {
+  width: 207px;
 }
 
 .videos_flex_container {
