@@ -1,7 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useUserContext } from "../Providers/UserProvider";
 import { useVideoContext } from "../Providers/videoProvider";
 import { Dispatch, SetStateAction } from "react";
+import { Requests } from "../API/Requests";
+import { jwtDecode } from "jwt-decode";
+import { JwtPayload } from "../types";
 
 export const AdminMenu = ({
   menuPosition,
@@ -17,9 +20,10 @@ export const AdminMenu = ({
   >;
 }) => {
   const navigate = useNavigate();
-  const { setJWT, setSubscribed, setVideosOwnedByUser } = useUserContext();
+  const { JWT, setJWT, setSubscribed, setVideosOwnedByUser } = useUserContext();
   const { setSignedMp4Url, setSignedWebmUrl } = useVideoContext();
 
+  const { videoId } = useParams();
   return (
     <>
       <nav
@@ -41,7 +45,29 @@ export const AdminMenu = ({
             Your Videos
           </li>
           <hr />
-          <li className="top_li">Account</li>
+          <li
+            className="top_li"
+            onClick={() => {
+              if (!videoId) {
+                throw new Error(
+                  "No videoId parameter in URL to give to Billing Portal Session to redirect back to"
+                );
+              }
+              console.log({ videoId });
+              const stripeCustomerId =
+                jwtDecode<JwtPayload>(JWT).stripeCustomerId;
+              console.log(stripeCustomerId);
+              Requests.createCustomerPortalSession(
+                stripeCustomerId,
+                +videoId
+              ).then((res) => {
+                console.log(res.url);
+                window.location.href = res.url;
+              });
+            }}
+          >
+            Account
+          </li>
           <hr />
           <li
             className="logout"

@@ -104,13 +104,16 @@ export const Requests = {
       body: JSON.stringify({ userId, videoId }),
     }).then((res) => res.json()),
 
-  createCustomerPortalSession: () =>
+  createCustomerPortalSession: (
+    stripeCustomerId: string,
+    lastVideoWatched: number
+  ) =>
     fetch(`${BASE_URL}/create_customer_portal_session`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         x_meta_function: "createCustomerPortalSession",
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({ stripeCustomerId, lastVideoWatched }),
     }).then((res) => res.json()),
 };

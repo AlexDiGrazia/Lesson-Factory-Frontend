@@ -17,5 +17,6 @@ export type JwtPayload = {
   emailVerified: boolean;
   subscribed: boolean;
   iat: number;
+  stripeCustomerId: string;
   videosOwnedByUser: number[];
 };
