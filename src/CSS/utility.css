@@ -22,3 +22,9 @@
 .semi-bold {
   font-weight: 500;
 }
+
+.blue {
+  color: blue;
+}
+/* just needed to add something to push new code to trigger a new deployment with new env variables
+CI/CI is not setup yet */
