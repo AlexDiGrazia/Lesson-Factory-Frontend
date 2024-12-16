@@ -10,6 +10,8 @@ const stripePromise = loadStripe(
   import.meta.env.VITE_STRIPE_PUBLISHABLE_API_KEY
 );
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export const CheckoutForm = ({
   priceId,
   mode,
@@ -22,7 +24,7 @@ export const CheckoutForm = ({
   const { videoId } = useParams();
 
   const fetchClientSecret = useCallback(() => {
-    return fetch("http://localhost:3000/create-checkout-session", {
+    return fetch(`${BASE_URL}/create-checkout-session`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
