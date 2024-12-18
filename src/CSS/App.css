@@ -6,6 +6,7 @@ body {
     #24277569 1%,
     rgb(79 17 17 / 24%) 100%
   );
+  color: white !important;
 }
 
 .videoPlayerModal_centeringContainer {
