@@ -4,7 +4,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useUserContext } from "../Providers/UserProvider";
 import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from "../types";
@@ -14,6 +14,8 @@ const stripePromise = loadStripe(
 );
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+const website_url = "https://www.thelessonfactory.com";
 
 export const CheckoutForm = ({
   priceId,
@@ -25,8 +27,8 @@ export const CheckoutForm = ({
   return_url: string;
 }) => {
   const { videoId } = useParams();
-
   const { JWT } = useUserContext();
+  const location = useLocation();
 
   const userObject = jwtDecode<JwtPayload>(JWT);
   const customer_email = userObject.email;
@@ -43,6 +45,7 @@ export const CheckoutForm = ({
         return_url,
         videoId,
         customer_email,
+        cancel_url: `${website_url}/${location.pathname}`,
       }),
     })
       .then((res) => res.json())
