@@ -11,7 +11,3 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
-div#root div {
-  overflow-y: scroll;
-}
