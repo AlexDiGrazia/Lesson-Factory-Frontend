@@ -45,7 +45,6 @@ export const CheckoutForm = ({
         return_url,
         videoId,
         customer_email,
-        cancel_url: `${website_url}/${location.pathname}`,
       }),
     })
       .then((res) => res.json())
