@@ -61,7 +61,8 @@ const router = createBrowserRouter([
         element: (
           <Root>
             <CheckoutForm
-              priceId="price_1QDhp72NGxzi9IJzeoDYcTfy"
+              // priceId="price_1QDhp72NGxzi9IJzeoDYcTfy" /* $20 subscription 1 month */
+              priceId="price_1QcIuf2NGxzi9IJznrrMIyqm" /* $2 subscription 1 day */
               mode="subscription"
               return_url="buy_subscription/confirmation"
             />
