@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction } from "react";
 import { Requests } from "../API/Requests";
 import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from "../types";
+import toast from "react-hot-toast";
 
 export const AdminMenu = ({
   menuPosition,
@@ -57,13 +58,23 @@ export const AdminMenu = ({
               const stripeCustomerId =
                 jwtDecode<JwtPayload>(JWT).stripeCustomerId;
               console.log(stripeCustomerId);
-              Requests.createCustomerPortalSession(
-                stripeCustomerId,
-                +videoId
-              ).then((res) => {
-                console.log(res.url);
-                window.location.href = res.url;
-              });
+
+              if (stripeCustomerId) {
+                Requests.createCustomerPortalSession(
+                  stripeCustomerId,
+                  +videoId
+                ).then((res) => {
+                  console.log(res.url);
+                  window.location.href = res.url;
+                });
+              } else {
+                toast.error(
+                  "This is for managing your Subscription after you have purchased one.",
+                  {
+                    duration: 7000,
+                  }
+                );
+              }
             }}
           >
             Account
