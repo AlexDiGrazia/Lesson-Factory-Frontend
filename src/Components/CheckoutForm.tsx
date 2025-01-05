@@ -5,6 +5,9 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import { useCallback } from "react";
 import { useParams } from "react-router-dom";
+import { useUserContext } from "../Providers/UserProvider";
+import { jwtDecode } from "jwt-decode";
+import { JwtPayload } from "../types";
 
 const stripePromise = loadStripe(
   import.meta.env.VITE_STRIPE_PUBLISHABLE_API_KEY
@@ -23,13 +26,24 @@ export const CheckoutForm = ({
 }) => {
   const { videoId } = useParams();
 
+  const { JWT } = useUserContext();
+
+  const userObject = jwtDecode<JwtPayload>(JWT);
+  const customer_email = userObject.email;
+
   const fetchClientSecret = useCallback(() => {
     return fetch(`${BASE_URL}/create-checkout-session`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ priceId, mode, return_url, videoId }),
+      body: JSON.stringify({
+        priceId,
+        mode,
+        return_url,
+        videoId,
+        customer_email,
+      }),
     })
       .then((res) => res.json())
       .then((data) => data.clientSecret);
