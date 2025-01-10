@@ -17,6 +17,14 @@ import { Toaster } from "react-hot-toast";
 import { CheckoutForm } from "./CheckoutForm";
 import { SubscriptionConfirmation } from "./SubscriptionConfirmation";
 import { PurchaseConfirmation } from "./PurchaseConfirmation";
+import ReactGA from "react-ga4";
+
+ReactGA.initialize("G-481T2HXKH5");
+
+ReactGA.send({
+  hitType: "pageview",
+  page: window.location.pathname,
+});
 
 const router = createBrowserRouter([
   {
